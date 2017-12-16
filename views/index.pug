@@ -5,3 +5,6 @@ html
     h1= message
     p
       a(href="#") 文字
+    form(action="/images" method="POST" enctype="multipart/form-data")
+      input(type="file" name="faceImage")
+      button(type="submit") 送信

@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
+const models = require('./models')
 
 app.set('view engine', 'pug');
 
@@ -14,10 +15,18 @@ app.listen(process.env.PORT || 3000, function(){
 });
 
 app.get('/', function(req, res){
-  res.render('index', {title: 'タイトル', message: 'メッセージ'});
+  models.Image.findAll().then(function(images){
+    res.render('index', {
+      images: images
+    });
+  })
 })
 
 app.post('/images', upload.single('faceImage'), function(req, res){
   console.log(req.file);
-  res.send('res_send');
+  console.log(models);
+  models.Image.create(req.file).then(function(image){
+    console.log(image);
+    res.send('res_send');
+  })
 })

@@ -1,0 +1,8 @@
+サーバー立ち上げ
+postgres -D /usr/local/var/postgres
+
+NODE立ち上げ
+npm run dev
+
+モデル作成
+node_modules/.bin/sequalize model:generate --name Rating --attributes like:boolean,userId:integer,imageId:integer

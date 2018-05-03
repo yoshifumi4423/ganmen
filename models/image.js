@@ -7,13 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     mimetype: DataTypes.STRING,
     destination: DataTypes.STRING,
     filename: DataTypes.STRING,
-    size: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+    size: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER
+  }, {});
+  Image.associate = (models) => {
+    Image.belongsTo(models.User, {foreignKey: 'userId'})
+  }
   return Image;
 };

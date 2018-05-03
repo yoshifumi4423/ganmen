@@ -1,0 +1,11 @@
+html
+  head
+    //- title= title
+  body
+    //- h1= message
+    
+    div
+      form(action="/image" method="POST" enctype="multipart/form-data")
+        input(type="file" name="faceImage")
+        button(type="submit") 送信
+        

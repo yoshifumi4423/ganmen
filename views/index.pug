@@ -1,9 +1,7 @@
 html
   head
-    //- title= title
+
   body
-    //- h1= message
-    
     div
       a(href="/secret") シークレット
       br
@@ -12,14 +10,12 @@ html
       a(href="/login") ログイン
       br
       a(href="/logout") ログアウト
+      br
+      a(href="/image") 画像投稿
 
-    form(action="/images" method="POST" enctype="multipart/form-data")
-      input(type="file" name="faceImage")
-      button(type="submit") 送信
-      
-      
-    ul
-      each image in images
-        li
-          img(src=image.filename)
+      ul
+        each image in images
+          li
+            p= image.userId
+            img(src=image.filename)
       

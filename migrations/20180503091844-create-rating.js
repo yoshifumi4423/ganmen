@@ -1,20 +1,25 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
+    return queryInterface.createTable('Ratings', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      email: {
+      like: {
         allowNull: false,
-        type: Sequelize.STRING
+        defaultValue: false,
+        type: Sequelize.BOOLEAN
       },
-      password: {
+      userId: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
+      },
+      imageId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -25,13 +30,13 @@ module.exports = {
         type: Sequelize.DATE
       }
     }).then(() => {
-      return queryInterface.addIndex("Users", {
-        fields: ['email'],
-        unique: true
+      return queryInterface.addIndex("Ratings", {
+        fields: ['userId', 'imageId'],
+        unique: true,
       })
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
+    return queryInterface.dropTable('Ratings');
   }
 };

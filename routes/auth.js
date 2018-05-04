@@ -8,13 +8,35 @@ router.get('/signup', auth, function(req, res){
   res.render('signup');
 })
 
-router.post('/signup', auth, function(req, res){
-  bcrypt.hash(req.body.password, 10).then(function(hash){
+router.post('/signup', auth, function(req, res, next){
+  const pw = req.body.password
+  if(!pw){
+    return res.render('signup', {
+      errors: ["パスワードを入力してください。"]
+    })
+  }else if(pw.length < 8){
+    return res.render('signup', {
+      errors: ["パスワードを8文字以上で入力してください。"]
+    })
+  }
+
+  bcrypt.hash(pw, 10).then((hash) => {
     models.User.create({
       email:req.body.email,
       password:hash
-    }).then(function(user){
-      res.send('res_send');
+    }).then((user) => {
+      throw new Error("テストエラー")
+      res.redirect('/');
+    }).catch((errorObj) => {
+      if(errorObj.name === 'SequelizeValidationError' ||
+         errorObj.name === 'SequelizeUniqueConstraintError'){
+        console.log(errorObj)
+        return res.render('signup', {
+          errors: errorObj.errors.map(e => e.message)
+        })
+      }
+      
+      return next(errorObj)
     })
   })
 })

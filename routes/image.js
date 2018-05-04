@@ -1,4 +1,5 @@
 const express = require('express')
+const models = require('../models')
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'});
 const auth = require('../middlewares/auth')

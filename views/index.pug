@@ -3,8 +3,6 @@ html
 
   body
     div
-      a(href="/secret") シークレット
-      br
       a(href="/signup") サインアップ
       br
       a(href="/login") ログイン
@@ -18,4 +16,10 @@ html
           li
             p= image.userId
             img(src=image.filename)
-      
+            div
+              form(action="/skip" method="POST")
+                input(type="hidden" name="imageId" value=image.id)
+                button(type="submit") SKIP
+              form(action="/like" method="POST")
+                input(type="hidden" name="imageId" value=image.id)
+                button(type="submit") LIKE

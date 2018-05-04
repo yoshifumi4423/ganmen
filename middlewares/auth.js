@@ -1,3 +1,5 @@
+const models = require('../models')
+
 const auth = (req, res, next) => {
   const id = req.session.user_id
   if (!id) {

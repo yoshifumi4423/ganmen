@@ -10,4 +10,7 @@ html
       input(type="password" name="password" placeholder="password")
       br
       button(type="submit") サインアップ
-      
+  
+    if errors
+      each error in errors
+        p= error

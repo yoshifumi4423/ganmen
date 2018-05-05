@@ -10,7 +10,7 @@ const imageRouter = require('./routes/image')
 const authRouter = require('./routes/auth')
 const ratingRouter = require('./routes/rating')
 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('uploads'));

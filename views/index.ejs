@@ -1,0 +1,33 @@
+<html>
+  <head></head>
+
+  <body>
+    <div>
+      <a href="/signup">サインアップ</a>
+      <br>
+      <a href="/login">ログイン</a>
+      <br>
+      <a href="/logout">ログアウト</a>
+      <br>
+      <a href="/image">画像投稿</a>
+
+      <ul>
+        <% images.forEach(function(image){ %>
+          <li>
+            <p><%= image.userId %></p>
+            <img src="<%= image.filename %>">
+            <div>
+              <form action="/skip" method="POST">
+                <input type="hidden" name="imageId" value="<%= image.id %>">
+                <button type="submit">SKIP</button>
+              </form>
+              <form action="/like" method="POST">
+                <input type="hidden" name="imageId" value="<%= image.id %>">
+                <button type="submit">LIKE</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+    </div>
+  </body>
+</html>

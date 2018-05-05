@@ -25,7 +25,6 @@ router.post('/signup', auth, function(req, res, next){
       email:req.body.email,
       password:hash
     }).then((user) => {
-      throw new Error("テストエラー")
       res.redirect('/');
     }).catch((errorObj) => {
       if(errorObj.name === 'SequelizeValidationError' ||
@@ -35,7 +34,6 @@ router.post('/signup', auth, function(req, res, next){
           errors: errorObj.errors.map(e => e.message)
         })
       }
-      
       return next(errorObj)
     })
   })
@@ -52,14 +50,13 @@ router.post('/login', auth, function(req, res){
     where:{
       email:req.body.email
     }
-  }).then(function(user){
-    bcrypt.compare(req.body.password, user.password).then(function(same){
-      if (same) {
-        console.log("認証！")
-      }
+  }).then((user) => {
+    bcrypt.compare(req.body.password, user.password).then((same) => {
       req.session.user_id = user.id
       res.send('res_send')
     })
+  }).catch((errorObj) => {
+    
   })
 })
 

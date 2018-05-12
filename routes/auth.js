@@ -5,7 +5,9 @@ const auth = require('../middlewares/auth')
 const router = express.Router()
 
 router.get('/signup', auth, function(req, res){
-  res.render('signup');
+  res.render('signup', {
+    errors: []
+  });
 })
 
 router.post('/signup', auth, function(req, res, next){

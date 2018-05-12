@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -r dotenv/config index.js",
-    "start": "node -r dotenv/config index.js"
+    "start": "node -r dotenv/config index.js",
+    "build": "webpack --mode development",
+    "watch": "webpack --watch --mode development"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +27,8 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "sequelize": "^4.33.3",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "session-file-store": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

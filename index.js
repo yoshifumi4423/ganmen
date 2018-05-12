@@ -3,21 +3,30 @@ const app = express();
 const bodyParser = require('body-parser');
 const models = require('./models')
 const session = require("express-session")
+const sessionFileStore = require("session-file-store")(session)
 const bcrypt = require("bcrypt")
 
 const auth = require('./middlewares/auth')
-const imageRouter = require('./routes/image')
+
+const imageRouter = require('./routes/images')
 const authRouter = require('./routes/auth')
 const ratingRouter = require('./routes/rating')
+const apiRouter = require('./routes/api')
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('uploads'));
-app.use(session({ secret: 'keyboard cat', key: 'sid'}));
-app.use('/image', imageRouter)
+app.use(express.static('dist'))
+app.use(session({
+  store: new sessionFileStore(),
+  secret: 'keyboard cat',
+  key: 'sid'
+}));
+app.use('/images', imageRouter)
 app.use('/', authRouter)
 app.use('/', ratingRouter)
+app.use('/api', apiRouter)
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("server listen");

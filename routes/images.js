@@ -5,15 +5,23 @@ const upload = multer({dest: 'uploads/'});
 const auth = require('../middlewares/auth')
 const router = express.Router()
 
-router.get('/', auth, function(req, res){
+router.get('/', auth, (req, res) => {
   if (!req.user) {
-    return res.redirect('/')
+    return res.send('error: please login.');
   }
 
-  res.render('image')
+  res.render('images/index')
 })
 
-router.post('/', auth, upload.single('faceImage'), function(req, res){
+router.get('/new', auth, (req, res) => {
+  if (!req.user) {
+    return res.send('error: please login.');
+  }
+
+  res.render('images/new')
+})
+
+router.post('/new', auth, upload.single('faceImage'), function(req, res){
   if (!req.user) {
     return res.send('error: please login.');
   }

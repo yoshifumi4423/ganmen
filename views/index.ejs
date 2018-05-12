@@ -9,25 +9,9 @@
       <br>
       <a href="/logout">ログアウト</a>
       <br>
-      <a href="/image">画像投稿</a>
-
-      <ul>
-        <% images.forEach(function(image){ %>
-          <li>
-            <p><%= image.userId %></p>
-            <img src="<%= image.filename %>">
-            <div>
-              <form action="/skip" method="POST">
-                <input type="hidden" name="imageId" value="<%= image.id %>">
-                <button type="submit">SKIP</button>
-              </form>
-              <form action="/like" method="POST">
-                <input type="hidden" name="imageId" value="<%= image.id %>">
-                <button type="submit">LIKE</button>
-              </form>
-            </div>
-          </li>
-        <% }) %>
+      <a href="/images">画像一覧</a>
+      <br>
+      <a href="/images/new">画像投稿</a>
     </div>
   </body>
 </html>

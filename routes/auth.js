@@ -27,6 +27,7 @@ router.post('/signup', auth, function(req, res, next){
       email:req.body.email,
       password:hash
     }).then((user) => {
+      // ToDo: サインアップ後にログインできているかチェックする。
       res.redirect('/');
     }).catch((errorObj) => {
       if(errorObj.name === 'SequelizeValidationError' ||

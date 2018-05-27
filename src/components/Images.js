@@ -5,25 +5,28 @@ class Images extends React.Component {
   constructor() {
     super()
     this.state = {
-      image: {}
+      images: []
     }
   }
 
   componentDidMount() {
-    fetch('/api/images')
+    fetch('/api/images', {credentials: "same-origin"})
       .then(response => {
         return response.json()
       })
       .then(json => {
-        console.log(json)
-        this.setState({image: json.image})
+        this.setState({images: json.images})
       })
   }
 
   render() {
     return (
       <div>
-        <img src={this.state.image.filename} />
+        {
+          this.state.images.map((image) => {
+            return <img src={image.filename} key={image.id}/>
+          })
+        }
       </div>
     )
   }

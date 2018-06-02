@@ -1,13 +1,16 @@
-import React from "react"
+import React, { Fragment } from "react"
 import styled from "styled-components"
 
 const Image = styled.div`
-  position: absolute;
-  max-width: 500px;
+  width: 100%;
   img {
     width: 100%;
   }
- `
+`
+const ImageWrapper = styled.div`
+  width: 500px;
+
+`
 
 // reactのcomponent
 class Images extends React.Component {
@@ -19,13 +22,40 @@ class Images extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/images', {credentials: "same-origin"})
+    fetch('/api/images', {
+      credentials: "same-origin"
+    })
       .then(response => {
         return response.json()
       })
       .then(json => {
-        this.setState({images: json.images})
+        this.setState({ images: json.images })
       })
+  }
+
+  like(imageId) {
+    fetch('/api/like', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({imageId: imageId}),
+      credentials: "same-origin",
+      method: "POST",
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      if (json.result) {
+        console.log("成功")
+        const newImages = this.state.images.filter((image) => {
+          return image.id !== imageId 
+        })
+        this.setState({ images: newImages })
+      } else {
+        console.log("失敗")
+      }
+    })
   }
 
   render() {
@@ -33,7 +63,13 @@ class Images extends React.Component {
       <div>
         {
           this.state.images.map((image) => {
-            return <Image key={image.id}><img src={image.filename}/></Image>
+            return (
+              <ImageWrapper key={image.id}>
+                <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
+                <button >スキップ {image.id}</button>
+                <Image><img src={image.filename} /></Image>
+              </ImageWrapper>
+            )
           })
         }
       </div>

@@ -10,12 +10,12 @@ const auth = require('./middlewares/auth')
 
 const imageRouter = require('./routes/images')
 const authRouter = require('./routes/auth')
-const ratingRouter = require('./routes/rating')
 const apiRouter = require('./routes/api')
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 app.use(express.static('uploads'));
 app.use(express.static('dist'))
 app.use(session({
@@ -25,7 +25,6 @@ app.use(session({
 }));
 app.use('/images', imageRouter)
 app.use('/', authRouter)
-app.use('/', ratingRouter)
 app.use('/api', apiRouter)
 
 app.listen(process.env.PORT || 3000, function(){

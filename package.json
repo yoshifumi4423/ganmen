@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -r dotenv/config index.js",
+    "dev": "nodemon -r dotenv/config index.js --ignore sessions",
     "start": "node -r dotenv/config index.js",
     "build": "webpack --mode development",
     "watch": "webpack --watch --mode development"

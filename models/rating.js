@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     imageId: DataTypes.INTEGER
   }, {});
   Rating.associate = (models) => {
-//    Rating.belongsTo(models.User, {foreignKey: 'userId'})
+    Rating.belongsTo(models.User, {foreignKey: 'userId'})
+    Rating.belongsTo(models.Image, {foreignKey: 'imageId'})
   };
   return Rating;
 };

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Image.associate = (models) => {
     Image.belongsTo(models.User, {foreignKey: 'userId'})
+    Image.hasMany(models.Rating, {foreignKey: 'imageId'})
   }
   return Image;
 };

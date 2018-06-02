@@ -1,11 +1,11 @@
 const express = require('express')
-const models = require('../models')
-const auth = require('../middlewares/auth')
 const router = express.Router()
+const models = require('../../models')
+const auth = require('../../middlewares/auth')
 
 router.post('/skip', auth, (req, res) => {
   if(!req.user){
-    return res.redirect('/')
+    return res.json({result: false})
   }
 
   models.Rating.create({
@@ -14,13 +14,13 @@ router.post('/skip', auth, (req, res) => {
     imageId: req.body.imageId
   }).then((rating) => {
     console.log(rating)
-    res.redirect('/')
+    res.json({result: true})
   })
 })
 
 router.post('/like', auth, function(req, res){
   if (!req.user) {
-    return res.redirect('/')
+    return res.json({result: false})
   }
 
   models.Rating.create({
@@ -29,8 +29,9 @@ router.post('/like', auth, function(req, res){
     imageId: req.body.imageId
   }).then((rating) => {
     console.log(rating)
-    res.redirect('/')
+    res.json({result: true})
   })
 })
+
 
 module.exports = router

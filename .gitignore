@@ -1,5 +1,8 @@
 node_modules
 .env
 uploads/*
+!uploads/test_image1.png
+!uploads/test_image2.png
+!uploads/test_image3.png
 sessions
 .DS_Store

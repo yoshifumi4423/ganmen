@@ -9,7 +9,7 @@ const Image = styled.div`
 `
 const ImageWrapper = styled.div`
   width: 500px;
-
+  position: absolute;
 `
 
 // reactのcomponent

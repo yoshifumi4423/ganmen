@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt")
 
 const auth = require('./middlewares/auth')
 
-const imageRouter = require('./routes/images')
+const imagesRouter = require('./routes/images')
 const authRouter = require('./routes/auth')
 const apiRouter = require('./routes/api')
 
@@ -23,7 +23,7 @@ app.use(session({
   secret: 'keyboard cat',
   key: 'sid'
 }));
-app.use('/images', imageRouter)
+app.use('/images', imagesRouter)
 app.use('/', authRouter)
 app.use('/api', apiRouter)
 

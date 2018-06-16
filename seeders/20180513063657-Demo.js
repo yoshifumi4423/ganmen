@@ -4,7 +4,7 @@ const models = require('../models')
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const userPromises = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 100; i++) {
       userPromises[i] = models.User.create({
         email: `user${i}@example.com`,
         password: `userpassword${i}`,

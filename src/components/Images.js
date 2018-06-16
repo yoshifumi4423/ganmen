@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import styled from "styled-components"
+import { fetchImages, fetchLike, fetchSkip } from "../api"
 
 const Image = styled.div`
   width: 100%;
@@ -9,7 +10,6 @@ const Image = styled.div`
 `
 const ImageWrapper = styled.div`
   width: 500px;
-  position: absolute;
 `
 
 // reactのcomponent
@@ -22,56 +22,64 @@ class Images extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/images', {
-      credentials: "same-origin"
+    fetchImages()
+    .then(json => {
+      this.setState({ images: json.images })
     })
-      .then(response => {
-        return response.json()
-      })
-      .then(json => {
-        this.setState({ images: json.images })
-      })
+  }
+
+  removeImage(imageId) {
+    const newImages = this.state.images.filter((image) => {
+      return image.id !== imageId 
+    })
+    this.setState({ images: newImages })
+  }
+
+  fetchMoreImages() {
+    if (this.state.images.length > 5) return
+
+    fetchImages()
+    .then(json => {
+      this.setState({ images: json.images })
+    })
   }
 
   like(imageId) {
-    fetch('/api/like', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({imageId: imageId}),
-      credentials: "same-origin",
-      method: "POST",
-    })
-    .then(response => {
-      return response.json()
-    })
+    fetchLike(imageId)
     .then(json => {
       if (json.result) {
-        console.log("成功")
-        const newImages = this.state.images.filter((image) => {
-          return image.id !== imageId 
-        })
-        this.setState({ images: newImages })
+        console.log("LIKE 成功")
+        this.removeImage(imageId)
+        this.fetchMoreImages()
       } else {
-        console.log("失敗")
+        console.log("LIKE 失敗")
       }
     })
   }
 
+  skip(imageId) {
+    fetchSkip(imageId)
+    .then(json => {
+      if (json.result) {
+        console.log("SKIP 成功")
+        this.removeImage(imageId)
+        this.fetchMoreImages()
+      } else {
+        console.log("SKIP 失敗")
+      }
+    })
+  }
+  
   render() {
     return (
       <div>
-        {
-          this.state.images.map((image) => {
-            return (
-              <ImageWrapper key={image.id}>
-                <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
-                <button >スキップ {image.id}</button>
-                <Image><img src={image.filename} /></Image>
-              </ImageWrapper>
-            )
-          })
-        }
+        {this.state.images.map((image) => (
+          <ImageWrapper key={image.id}>
+            <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
+            <button onClick={() => this.skip(image.id)}>スキップ {image.id}</button>
+            <Image><img src={image.filename} /></Image>
+          </ImageWrapper>
+        ))}
       </div>
     )
   }

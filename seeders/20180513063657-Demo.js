@@ -3,21 +3,36 @@ const models = require('../models')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const userPromises = []
     for (let i = 0; i < 100; i++) {
-      userPromises[i] = models.User.create({
-        email: `user${i}@example.com`,
-        password: `userpassword${i}`,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      const now = new Date()
+
+      models.Country.create({
+        name: `${i}`,
+        createdAt: now,
+        updatedAt: now,
       })
     }
+    const userPromises = []
+    for (let i = 0; i < 100; i++) {
+      const now = new Date();
 
+      userPromises.push(models.User.create({
+        email: `user${i}@example.com`,
+        password: `userpassword${i}`,
+        birthday: '2018-01-01',
+        gender: 'man',
+        countryId: i,
+        createdAt: now,
+        updatedAt: now,
+      }))
+    }
     return Promise.all(userPromises).then(users => {
       const imagePromises = []
       const test_images = ["test_image1.png", "test_image2.png","test_image3.png"]
       users.forEach(user => {
         for (let i = 0; i < 3; i++) {
+          const now = new Date();
+
           imagePromises.push(models.Image.create({
             fieldname: "faceImage",
             originalname: "test.png",
@@ -27,8 +42,8 @@ module.exports = {
             filename: test_images[i],
             size: 27109,
             userId: user.id,
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: now,
+            updatedAt: now,
           }))
         }
       })

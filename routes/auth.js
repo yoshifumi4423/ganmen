@@ -5,27 +5,35 @@ const auth = require('../middlewares/auth')
 const router = express.Router()
 
 router.get('/signup', auth, function(req, res){
-  res.render('signup', {
-    errors: []
-  });
+  models.Country.findAll().then((countries) => {
+    res.render('signup', {
+      countries: countries,
+      errors: []
+    });
+  })
 })
 
 router.post('/signup', auth, function(req, res, next){
   const pw = req.body.password
   if(!pw){
     return res.render('signup', {
+      countries: [],
       errors: ["パスワードを入力してください。"]
     })
   }else if(pw.length < 8){
     return res.render('signup', {
+      countries: [],
       errors: ["パスワードを8文字以上で入力してください。"]
     })
   }
 
   bcrypt.hash(pw, 10).then((hash) => {
     models.User.create({
-      email:req.body.email,
-      password:hash
+      email: req.body.email,
+      password: hash,
+      birthday: req.body.birthday,
+      gender: req.body.gender,
+      countryId: req.body.country,
     }).then((user) => {
       // ToDo: サインアップ後にログインできているかチェックする。
       res.redirect('/');
@@ -34,6 +42,7 @@ router.post('/signup', auth, function(req, res, next){
          errorObj.name === 'SequelizeUniqueConstraintError'){
         console.log(errorObj)
         return res.render('signup', {
+          countries: [],
           errors: errorObj.errors.map(e => e.message)
         })
       }

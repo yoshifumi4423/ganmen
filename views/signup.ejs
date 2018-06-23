@@ -8,6 +8,20 @@
       <br>
       <input type="password" name="password" placeholder="password">
       <br>
+      <input type="date" name="birthday" placeholder="birthday">
+      <br>
+      <select name="gender">
+        <option value="man">Man</option>
+        <option value="woman">Woman</option>
+      </select>
+      <br>
+      <select name="country">
+        <% if(countries) {
+          countries.forEach((country) => { %>
+            <option value="<%= country.id %>"><%= country.name %></option>
+          <% })
+        } %>
+      </select>
       <button type="submit">サインアップ</button>
     </form>
 

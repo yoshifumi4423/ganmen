@@ -11,7 +11,7 @@ router.get('/signup', auth, function(req, res){
       birthday:"",
       countries: countries,
       errors: []
-    });
+    })
   })
 })
 
@@ -42,7 +42,7 @@ router.post('/signup', auth, function(req, res, next){
       countryId: req.body.country,
     }).then((user) => {
       // ToDo: サインアップ後にログインできているかチェックする。
-      res.redirect('/');
+      res.redirect('/')
     }).catch((errorObj) => {
       if(errorObj.name === 'SequelizeValidationError' ||
          errorObj.name === 'SequelizeUniqueConstraintError'){

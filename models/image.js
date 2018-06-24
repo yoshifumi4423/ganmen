@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   var Image = sequelize.define('Image', {
     fieldname: DataTypes.STRING,
@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
     filename: DataTypes.STRING,
     size: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
-  }, {});
+  }, {})
   Image.associate = (models) => {
     Image.belongsTo(models.User, {foreignKey: 'userId'})
     Image.hasMany(models.Rating, {foreignKey: 'imageId'})
   }
-  return Image;
-};
+  return Image
+}

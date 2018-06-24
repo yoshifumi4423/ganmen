@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Countries', {
@@ -25,9 +25,9 @@ module.exports = {
         fields: ['name'],
         unique: true,
       })
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Countries');
+    return queryInterface.dropTable('Countries')
   }
-};
+}

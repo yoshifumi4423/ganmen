@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   var Country = sequelize.define('Country', {
     name: {
@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {});
+  }, {})
   Country.associate = function(models) {
     Country.hasMany(models.User, {foreignKey: 'countryId'})
-  };
-  return Country;
-};
+  }
+  return Country
+}

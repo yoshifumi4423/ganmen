@@ -27,7 +27,7 @@ router.post('/new', auth, upload.single('faceImage'), function(req, res){
   }
 
   req.file.userId = req.user.id
-  models.Image.create(req.file).then(function(image){
+  models.Image.create(req.file).then((image) => {
     res.send('res_send');
   })
 })

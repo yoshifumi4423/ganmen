@@ -4,11 +4,11 @@
     <h1>サインアップ</h1>
     
     <form action="/signup" method="POST">
-      <input type="text" name="email" placeholder="email">
+      <input type="text" name="email" placeholder="email" value="<%= email %>">
       <br>
-      <input type="password" name="password" placeholder="password">
+      <input type="password" name="password" placeholder="password" value="">
       <br>
-      <input type="date" name="birthday" placeholder="birthday">
+      <input type="date" name="birthday" placeholder="birthday" value="<%= birthday %>">
       <br>
       <select name="gender">
         <option value="man">Man</option>
@@ -25,10 +25,10 @@
       <button type="submit">サインアップ</button>
     </form>
 
-    <% if(errors) { %>
-      <% errors.forEach((error) => { %>
+    <% if(errors) {
+      errors.forEach((error) => { %>
         <p><%= error %></p>
-      <% }) %>
-    <% } %>
+      <% })
+    } %>
   </body>
 </html>

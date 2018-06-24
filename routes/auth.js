@@ -7,6 +7,8 @@ const router = express.Router()
 router.get('/signup', auth, function(req, res){
   models.Country.findAll().then((countries) => {
     res.render('signup', {
+      email: "",
+      birthday:"",
       countries: countries,
       errors: []
     });
@@ -17,11 +19,15 @@ router.post('/signup', auth, function(req, res, next){
   const pw = req.body.password
   if(!pw){
     return res.render('signup', {
+      email: "",
+      birthday:"",
       countries: [],
       errors: ["パスワードを入力してください。"]
     })
   }else if(pw.length < 8){
     return res.render('signup', {
+      email: "",
+      birthday:"",
       countries: [],
       errors: ["パスワードを8文字以上で入力してください。"]
     })
@@ -42,6 +48,8 @@ router.post('/signup', auth, function(req, res, next){
          errorObj.name === 'SequelizeUniqueConstraintError'){
         console.log(errorObj)
         return res.render('signup', {
+          email: "",
+          birthday:"",
           countries: [],
           errors: errorObj.errors.map(e => e.message)
         })

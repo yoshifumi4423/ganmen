@@ -11,14 +11,14 @@
       <input type="date" name="birthday" placeholder="birthday" value="<%= birthday %>">
       <br>
       <select name="gender">
-        <option value="man">Man</option>
-        <option value="woman">Woman</option>
+        <option value="man" <%= (gender === "man") ? "selected" : "" %>>Man</option>
+        <option value="woman" <%= (gender === "woman") ? "selected" : "" %>>Woman</option>
       </select>
       <br>
-      <select name="country">
+      <select name="countryId">
         <% if(countries) {
           countries.forEach((country) => { %>
-            <option value="<%= country.id %>"><%= country.name %></option>
+            <option value="<%= country.id %>" <%= (country.id === countryId) ? "selected" : "" %>><%= country.name %></option>
           <% })
         } %>
       </select>

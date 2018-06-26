@@ -9,7 +9,9 @@ router.get('/signup', auth, function(req, res){
   models.Country.findAll().then((countries) => {
     res.render('signup', {
       email: "",
-      birthday:"",
+      birthday: "",
+      gender: "",
+      countryId: 0,
       countries: countries,
       errors: []
     })
@@ -19,18 +21,26 @@ router.get('/signup', auth, function(req, res){
 router.post('/signup', auth, function(req, res, next){
   const pw = req.body.password
   if(!pw){
-    return res.render('signup', {
-      email: "",
-      birthday:"",
-      countries: [],
-      errors: ["パスワードを入力してください。"]
+    models.Country.findAll().then((countries) => {
+      return res.render('signup', {
+        email: req.body.email,
+        birthday:req.body.birthday,
+        gender: req.body.gender,
+        countryId: Number(req.body.countryId),
+        countries: countries,
+        errors: ["パスワードを入力してください。"]
+      })
     })
   }else if(pw.length < 8){
-    return res.render('signup', {
-      email: "",
-      birthday:"",
-      countries: [],
-      errors: ["パスワードを8文字以上で入力してください。"]
+    models.Country.findAll().then((countries) => {
+      return res.render('signup', {
+        email: req.body.email,
+        birthday:req.body.birthday,
+        gender: req.body.gender,
+        countryId: Number(req.body.countryId),
+        countries: countries,
+        errors: ["パスワードを8文字以上で入力してください。"]
+      })
     })
   }
 
@@ -40,7 +50,7 @@ router.post('/signup', auth, function(req, res, next){
       password: hash,
       birthday: req.body.birthday,
       gender: req.body.gender,
-      countryId: req.body.country,
+      countryId: Number(req.body.countryId),
     }).then((user) => {
       // ToDo: サインアップ後にログインできているかチェックする。
       res.redirect('/')
@@ -48,11 +58,16 @@ router.post('/signup', auth, function(req, res, next){
       if(errorObj.name === 'SequelizeValidationError' ||
          errorObj.name === 'SequelizeUniqueConstraintError'){
         console.log(errorObj)
-        return res.render('signup', {
-          email: "",
-          birthday:"",
-          countries: [],
-          errors: errorObj.errors.map(e => e.message)
+
+        models.Country.findAll().then((countries) => {
+          return res.render('signup', {
+            email: "",
+            birthday:"",
+            gender: req.body.gender,
+            countryId: Number(req.body.countryId),
+            countries: countries,
+            errors: errorObj.errors.map(e => e.message)
+          })
         })
       }
       return next(errorObj)

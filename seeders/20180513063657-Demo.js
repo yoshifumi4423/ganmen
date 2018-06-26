@@ -7,7 +7,7 @@ module.exports = {
       const now = new Date()
 
       models.Country.create({
-        name: `${i}`,
+        name: `country_${i}`,
         createdAt: now,
         updatedAt: now,
       })
@@ -70,7 +70,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     const promises = []
-    const dbName = ['Users', 'Ratings', 'Images']
+    const dbName = ['Countries', 'Users', 'Ratings', 'Images']
     for (let i = 0; i < 3; i++) {
       promises[i] = queryInterface.bulkDelete(dbName[i], null, {})
     }

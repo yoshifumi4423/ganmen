@@ -3,44 +3,37 @@ const express = require('express')
 const models = require('../models')
 const bcrypt = require("bcrypt")
 const auth = require('../middlewares/auth')
+const countries = require('../middlewares/countries')
 const router = express.Router()
 
 router.get('/signup', auth, function(req, res){
   models.Country.findAll().then((countries) => {
     res.render('signup', {
-      email: "",
-      birthday: "",
-      gender: "",
-      countryId: 0,
+      params: {
+        email: "",
+        birthday: "",
+        gender: "",
+        countryId: 0,
+      },
       countries: countries,
       errors: []
     })
   })
 })
 
-router.post('/signup', auth, function(req, res, next){
+router.post('/signup', auth, countries, function(req, res, next){
   const pw = req.body.password
   if(!pw){
-    models.Country.findAll().then((countries) => {
-      return res.render('signup', {
-        email: req.body.email,
-        birthday:req.body.birthday,
-        gender: req.body.gender,
-        countryId: Number(req.body.countryId),
-        countries: countries,
-        errors: ["パスワードを入力してください。"]
-      })
+    return res.render('signup', {
+      params: req.body,
+      countries: req.countries,
+      errors: ["パスワードを入力してください。"]
     })
   }else if(pw.length < 8){
-    models.Country.findAll().then((countries) => {
-      return res.render('signup', {
-        email: req.body.email,
-        birthday:req.body.birthday,
-        gender: req.body.gender,
-        countryId: Number(req.body.countryId),
-        countries: countries,
-        errors: ["パスワードを8文字以上で入力してください。"]
-      })
+    return res.render('signup', {
+      params: req.body,
+      countries: req.countries,
+      errors: ["パスワードを8文字以上で入力してください。"]
     })
   }
 
@@ -57,18 +50,11 @@ router.post('/signup', auth, function(req, res, next){
     }).catch((errorObj) => {
       if(errorObj.name === 'SequelizeValidationError' ||
          errorObj.name === 'SequelizeUniqueConstraintError'){
-        console.log(errorObj)
-
-        models.Country.findAll().then((countries) => {
           return res.render('signup', {
-            email: "",
-            birthday:"",
-            gender: req.body.gender,
-            countryId: Number(req.body.countryId),
-            countries: countries,
+            params: req.body,
+            countries: req.countries,
             errors: errorObj.errors.map(e => e.message)
           })
-        })
       }
       return next(errorObj)
     })

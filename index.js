@@ -40,6 +40,8 @@ app.get('/', function(req, res){
 })
 
 app.use((errorObj, req, res, next) => {
+  console.log("     ===== START (Internnal Server Error 500.) =====     ")
   console.log(errorObj)
-  res.status(500).send("Internal Server Error 500.")
+  console.log("     =====  END  =====     ")
+ // res.status(500).send("Internal Server Error 500.")
 })

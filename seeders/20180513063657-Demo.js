@@ -1,17 +1,10 @@
 'use strict';
 const models = require('../models')
+const fs = require('fs-extra')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    for (let i = 0; i < 100; i++) {
-      const now = new Date()
-
-      models.Country.create({
-        name: `${i}`,
-        createdAt: now,
-        updatedAt: now,
-      })
-    }
+    // Users
     const userPromises = []
     for (let i = 0; i < 100; i++) {
       const now = new Date();
@@ -27,6 +20,8 @@ module.exports = {
       }))
     }
     return Promise.all(userPromises).then(users => {
+
+      // Images
       const imagePromises = []
       const test_images = ["test_image1.png", "test_image2.png","test_image3.png"]
       users.forEach(user => {
@@ -71,7 +66,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     const promises = []
     const dbName = ['Users', 'Ratings', 'Images']
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < dbName.length; i++) {
       promises[i] = queryInterface.bulkDelete(dbName[i], null, {})
     }
     

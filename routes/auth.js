@@ -8,12 +8,7 @@ const router = express.Router()
 
 router.get('/signup', auth, countries, function(req, res){
   res.render('signup', {
-    params: {
-      email: "",
-      birthday: "",
-      gender: "",
-      countryId: 0,
-    },
+    params: {},
     countries: req.countries,
     errors: []
   })

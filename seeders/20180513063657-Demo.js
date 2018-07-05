@@ -64,9 +64,9 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     const promises = []
-    const dbName = ['Users', 'Ratings', 'Images']
-    for (let i = 0; i < dbName.length; i++) {
-      promises[i] = queryInterface.bulkDelete(dbName[i], null, {})
+    const tables = ['Users', 'Ratings', 'Images']
+    for (let i = 0; i < tables.length; i++) {
+      promises[i] = queryInterface.bulkDelete(tables[i], null, {})
     }
     
     return Promise.all(promises)

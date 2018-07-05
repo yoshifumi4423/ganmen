@@ -11,14 +11,14 @@
       <input type="date" name="birthday" placeholder="birthday" value="<%= params.birthday %>">
       <br>
       <select name="gender">
-        <option value="man" <%= (params.gender === "man")&&"selected" %>>Man</option>
-        <option value="woman" <%= (params.gender === "woman")&&"selected" %>>Woman</option>
+        <option value="man" <%= (params.gender === "man") && "selected" %>>Man</option>
+        <option value="woman" <%= (params.gender === "woman") && "selected" %>>Woman</option>
       </select>
       <br>
       <select name="countryId">
         <% if(countries) {
           countries.forEach((country) => { %>
-            <option value="<%= country.id %>" <%= (country.id === Number(params.countryId))&&"selected" %>><%= country.name %></option>
+            <option value="<%= country.id %>" <%= (country.id === Number(params.countryId)) && "selected" %>><%= country.name %></option>
           <% })
         } %>
       </select>

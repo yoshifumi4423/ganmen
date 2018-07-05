@@ -9,12 +9,7 @@ const router = express.Router()
 router.get('/signup', auth, function(req, res){
   models.Country.findAll().then((countries) => {
     res.render('signup', {
-      params: {
-        email: "",
-        birthday: "",
-        gender: "",
-        countryId: 0,
-      },
+      params: {},
       countries: countries,
       errors: []
     })

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     email: {
@@ -40,11 +40,11 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {});
+  }, {})
   User.associate = (models) => {
     User.belongsTo(models.Country, {foreignKey: 'countryId'})
     User.hasMany(models.Image, {foreignKey: 'userId'})
     User.hasMany(models.Rating, {foreignKey: 'userId'})
   }
-  return User;
-};
+  return User
+}

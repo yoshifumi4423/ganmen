@@ -1,5 +1,6 @@
 node_modules
 .env
+dist/*
 uploads/*
 !uploads/test_image1.png
 !uploads/test_image2.png

@@ -6,13 +6,16 @@ const auth = require('../middlewares/auth')
 const countries = require('../middlewares/countries')
 const router = express.Router()
 
-router.get('/signup', auth, function(req, res){
-  models.Country.findAll().then((countries) => {
-    res.render('signup', {
-      params: {},
-      countries: countries,
-      errors: []
-    })
+router.get('/signup', auth, countries, function(req, res){
+  res.render('signup', {
+    params: {
+      email: "",
+      birthday: "",
+      gender: "",
+      countryId: 0,
+    },
+    countries: req.countries,
+    errors: []
   })
 })
 

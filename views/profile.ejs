@@ -1,13 +1,9 @@
 <html>
   <head></head>
   <body>
-    <h1>サインアップ</h1>
-    
-    <form action="/signup" method="POST">
-      <input type="text" name="email" placeholder="email" value="<%= params.email %>">
-      <br><br>
-      <input type="password" name="password" placeholder="password" value="">
-      <br><br>
+    <h1>プロフィール変更</h1>
+
+    <form action="/profile" method="POST">
       <input type="date" name="birthday" value="<%= params.birthday %>">
       <br><br>
       <select name="gender">
@@ -16,17 +12,17 @@
       </select>
       <br><br>
       <select name="countryId">
-        <% if(countries) {
+        <% if (countries) {
           countries.forEach((country) => { %>
             <option value="<%= country.id %>" <%= (country.id === Number(params.countryId))&&"selected" %> ><%= country.name %></option>
           <% })
         } %>
       </select>
       <br><br>
-      <button type="submit">サインアップ</button>
+      <button type="submit">変更</button>
     </form>
 
-    <% if(errors) {
+    <% if (errors) {
       errors.forEach((error) => { %>
         <p><%= error %></p>
       <% })

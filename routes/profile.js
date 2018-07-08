@@ -13,11 +13,7 @@ router.get('/', auth, countries, (req, res) => {
   }
 
   res.render('profile', {
-    params: {
-      birthday: req.user.birthday,
-      gender: req.user.gender,
-      countryId: req.user.countryId,
-    },
+    form: req.user,
     countries: req.countries,
     errors: []
   })
@@ -28,17 +24,9 @@ router.post('/', auth, countries, (req, res) => {
     return res.send('error: please login.')
   }
 
-  req.user.update({
-    birthday: req.body.birthday,
-    gender: req.body.gender,
-    countryId: req.body.countryId,
-  }).then((user) => {
+  req.user.update(req.body).then((user) => {
     res.render('profile', {
-      params: {
-        birthday: req.body.birthday,
-        gender: req.body.gender,
-        countryId: req.body.countryId,
-      },
+      form: req.body,
       countries: req.countries,
       errors: []
     })

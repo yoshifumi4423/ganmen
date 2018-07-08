@@ -8,12 +8,7 @@ const router = express.Router()
 
 router.get('/signup', auth, countries, function(req, res){
   res.render('signup', {
-    params: {
-      email: "",
-      birthday: "",
-      gender: "",
-      countryId: 0,
-    },
+    form: {},
     countries: req.countries,
     errors: []
   })
@@ -23,13 +18,13 @@ router.post('/signup', auth, countries, function(req, res, next){
   const pw = req.body.password
   if(!pw){
     return res.render('signup', {
-      params: req.body,
+      form: req.body,
       countries: req.countries,
       errors: ["パスワードを入力してください。"]
     })
   }else if(pw.length < 8){
     return res.render('signup', {
-      params: req.body,
+      form: req.body,
       countries: req.countries,
       errors: ["パスワードを8文字以上で入力してください。"]
     })
@@ -41,7 +36,7 @@ router.post('/signup', auth, countries, function(req, res, next){
       password: hash,
       birthday: req.body.birthday,
       gender: req.body.gender,
-      countryId: Number(req.body.countryId),
+      countryId: req.body.countryId,
     }).then((user) => {
       // ToDo: サインアップ後にログインできているかチェックする。
       res.redirect('/')
@@ -49,7 +44,7 @@ router.post('/signup', auth, countries, function(req, res, next){
       if(errorObj.name === 'SequelizeValidationError' ||
          errorObj.name === 'SequelizeUniqueConstraintError'){
           return res.render('signup', {
-            params: req.body,
+            form: req.body,
             countries: req.countries,
             errors: errorObj.errors.map(e => e.message)
           })

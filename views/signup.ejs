@@ -4,23 +4,23 @@
     <h1>サインアップ</h1>
     
     <form action="/signup" method="POST">
-      <input type="text" name="email" placeholder="email" value="<%= params.email %>">
+      <input type="text" name="email" placeholder="email" value="<%= form.email %>">
       <br><br>
       <input type="password" name="password" placeholder="password" value="">
       <br><br>
-      <input type="date" name="birthday" value="<%= params.birthday %>">
+      <input type="date" name="birthday" value="<%= form.birthday %>">
       <br><br>
       <select name="gender">
-        <option value="man" <%= (params.gender === "man")&&"selected" %>>Man</option>
-        <option value="woman" <%= (params.gender === "woman")&&"selected" %>>Woman</option>
+        <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
+        <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
       </select>
       <br><br>
       <select name="countryId">
-        <% if(countries) {
-          countries.forEach((country) => { %>
-            <option value="<%= country.id %>" <%= (country.id === Number(params.countryId))&&"selected" %> ><%= country.name %></option>
-          <% })
-        } %>
+        <% countries.forEach((country) => { %>
+          <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId) ? 'selected' : '' %> >
+            <%= country.name %>
+          </option>
+        <% }) %>
       </select>
       <br><br>
       <button type="submit">サインアップ</button>

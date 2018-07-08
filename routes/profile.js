@@ -24,7 +24,11 @@ router.post('/', auth, countries, (req, res) => {
     return res.send('error: please login.')
   }
 
-  req.user.update(req.body).then((user) => {
+  req.user.update({
+    birthday: req.body.birthday,
+    gender: req.body.gender,
+    countryId: req.body.countryId,
+  }).then((user) => {
     res.render('profile', {
       form: req.body,
       countries: req.countries,

@@ -1,8 +1,7 @@
 const express = require('express')
 const models = require('../models')
-const multer = require('multer')
-const upload = multer({dest: 'uploads/'})
 const auth = require('../middlewares/auth')
+const upload = require('../middlewares/upload')
 const router = express.Router()
 
 router.get('/', auth, (req, res) => {
@@ -21,7 +20,7 @@ router.get('/new', auth, (req, res) => {
   res.render('images/new')
 })
 
-router.post('/new', auth, upload.single('faceImage'), function(req, res){
+router.post('/', auth, upload, (req, res) => {
   if (!req.user) {
     return res.send('error: please login.')
   }

@@ -4,9 +4,14 @@ const models = require('../models')
 const bcrypt = require("bcrypt")
 const auth = require('../middlewares/auth')
 const countries = require('../middlewares/countries')
+const AppError = require('../errors/AppError')
 const router = express.Router()
 
 router.get('/signup', auth, countries, function(req, res){
+  if (req.user) {
+    res.redirect('/')
+  }
+
   res.render('signup', {
     form: {},
     countries: req.countries,
@@ -15,6 +20,10 @@ router.get('/signup', auth, countries, function(req, res){
 })
 
 router.post('/signup', auth, countries, function(req, res, next){
+  if (req.user) {
+    res.redirect('/')
+  }
+
   const pw = req.body.password
   if(!pw){
     return res.render('signup', {
@@ -55,23 +64,60 @@ router.post('/signup', auth, countries, function(req, res, next){
 })
 
 router.get('/login', auth, function(req, res){
+  if (req.user) {
+    res.redirect('/')
+  }
+
   console.log("session : ", req.session.user)
-  res.render('login')
+  res.render('login', {
+    form: {},
+    errors: []
+  })
 })
 
 router.post('/login', auth, function(req, res){
+  if (req.user) {
+    res.redirect('/')
+  }
+
   console.log("session : ", req.session.user)
-  models.User.findOne({
+  const result = models.User.findOne({
     where:{
-      email:req.body.email
+      email: req.body.email
     }
   }).then((user) => {
-    bcrypt.compare(req.body.password, user.password).then((same) => {
+    if (!user) {
+      throw new AppError("メールアドレスまたはパスワードが間違っています。")
+    }
+
+    bcrypt.compare(req.body.password, user.password).then((result) => {
+      if (!result) {
+        throw new AppError("メールアドレスまたはパスワードが間違っています。")
+      }
+
       req.session.user_id = user.id
       res.send('res_send')
+    }).catch((errorObj) => {
+      if (errorObj.name === 'AppError') {
+        return res.render('login', {
+          form: {
+            email: req.body.email
+          },
+          errors: [errorObj.message]
+        })
+      }
+      return next(errorObj)
     })
   }).catch((errorObj) => {
-    
+    if (errorObj.name === 'AppError') {
+      return res.render('login', {
+        form: {
+          email: req.body.email
+        },
+        errors: [errorObj.message]
+      })
+    }
+    return next(errorObj)
   })
 })
 

@@ -30,8 +30,8 @@ module.exports = {
 
           imagePromises.push(models.Image.create({
             mimetype: "image/png",
-            originalUrl: `http://localhost3000/${test_images[i]}`,
-            thumbnailUrl: `http://localhost3000/${test_images_thumbnail[i]}`,
+            originalUrl: `http://localhost:3000/${test_images[i]}`,
+            thumbnailUrl: `http://localhost:3000/${test_images_thumbnail[i]}`,
             userId: user.id,
             createdAt: now,
             updatedAt: now,

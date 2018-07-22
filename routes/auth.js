@@ -81,7 +81,7 @@ router.post('/login', auth, function(req, res){
   }
 
   console.log("session : ", req.session.user)
-  const result = models.User.findOne({
+  models.User.findOne({
     where:{
       email: req.body.email
     }
@@ -90,23 +90,13 @@ router.post('/login', auth, function(req, res){
       throw new AppError("メールアドレスまたはパスワードが間違っています。")
     }
 
-    bcrypt.compare(req.body.password, user.password).then((result) => {
+    return bcrypt.compare(req.body.password, user.password).then((result) => {
       if (!result) {
         throw new AppError("メールアドレスまたはパスワードが間違っています。")
       }
 
       req.session.user_id = user.id
       res.send('res_send')
-    }).catch((errorObj) => {
-      if (errorObj.name === 'AppError') {
-        return res.render('login', {
-          form: {
-            email: req.body.email
-          },
-          errors: [errorObj.message]
-        })
-      }
-      return next(errorObj)
     })
   }).catch((errorObj) => {
     if (errorObj.name === 'AppError') {

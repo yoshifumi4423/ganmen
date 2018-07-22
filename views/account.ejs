@@ -2,16 +2,20 @@
   <h1>アカウント変更</h1>
   
   <body>
-    <form action="/account" method="POST">
+    <form action="/account/email" method="POST">
       <input type="email" name="email" placeholder="email" value="<%= form.email %>">
       <br><br>
+      <button type="submit">メールアドレスを変更</button>
+      <br><br>
+    </form>
+    <form action="/account/password" method="POST">
       <input type="password" name="currentPassword" placeholder="現在のpassword">
       <br>
       <input type="password" name="newPassword" placeholder="新しいパスワード">
       <br>
       <input type="password" name="newPasswordConfirmation" placeholder="新しいパスワードの確認">
       <br><br>
-      <button type="submit">変更</button>
+      <button type="submit">パスワードを変更</button>
     </form>
 
     <% if (errors) {

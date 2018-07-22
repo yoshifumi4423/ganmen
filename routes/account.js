@@ -22,16 +22,9 @@ router.post('/', auth, (req, res) => {
     return res.send('error: please login.')
   }
 
-  console.log('email    ' + req.body.email)
-
   const currentPw = req.body.currentPassword
   const newPw = req.body.newPassword
   const newPwConfirmation = req.body.newPasswordConfirmation
-
-  console.log('currentPw    ' + currentPw)
-  console.log('newPw    ' + newPw)
-  console.log('newPwConfirmation    ' + newPwConfirmation)
-  console.log('req.user.password    ' + req.user.password)
 
   if (currentPw || newPw || newPwConfirmation) {
     bcrypt.compare(currentPw, req.user.password).then((same) => {

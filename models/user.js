@@ -1,4 +1,6 @@
 'use strict'
+const models = require('../models')
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     email: {
@@ -29,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: "性別を入力してください。"
+        },
+        isIn: {
+          args: [['man', 'woman']],
+          msg: "Man か Woman のどちらかを選択してください。"
         }
       }
     },
@@ -36,7 +42,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: {
-          msg: "国を入力してください。"
+          msg: "国を選択してください。"
+        },
+        isCountryId(value) {
+//          models.Country.findById(value).then((country) => {
+//            throw new Error("国を選択してください。")
+//          })
         }
       }
     }

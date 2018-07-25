@@ -23,6 +23,13 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: "誕生日を入力してください。"
+        },
+        isBetween1900AndToday(value) {
+          const birthday = new Date(value.replace(/-/, '/'))
+          const jan1st1900 = new Date('1900/1/1')
+          const today = new Date()
+          
+          if (birthday < jan1st1900 || birthday > today) throw new Error("誕生日を入力してください。")
         }
       }
     },

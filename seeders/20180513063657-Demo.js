@@ -23,18 +23,15 @@ module.exports = {
       // Images
       const imagePromises = []
       const test_images = ["test_image1.png", "test_image2.png","test_image3.png"]
+      const test_images_thumbnail = ["test_image1-640x640.png", "test_image2-640x640.png","test_image3-640x640.png"]
       users.forEach(user => {
         for (let i = 0; i < 3; i++) {
           const now = new Date()
 
           imagePromises.push(models.Image.create({
-            fieldname: "faceImage",
-            originalname: "test.png",
-            encoding: "7bit",
             mimetype: "image/png",
-            destination: "uploads/",
-            filename: test_images[i],
-            size: 27109,
+            originalUrl: `http://localhost:3000/${test_images[i]}`,
+            thumbnailUrl: `http://localhost:3000/${test_images_thumbnail[i]}`,
             userId: user.id,
             createdAt: now,
             updatedAt: now,

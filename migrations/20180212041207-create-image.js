@@ -8,33 +8,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fieldname : {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      originalname : {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      encoding : {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       mimetype : {
         allowNull: false,
         type: Sequelize.STRING
       },
-      destination : {
+      originalUrl : {
         allowNull: false,
         type: Sequelize.STRING
       },
-      filename : {
+      thumbnailUrl : {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      size : {
-        allowNull: false,
-        type: Sequelize.INTEGER
       },
       userId : {
         allowNull: false,

@@ -77,7 +77,7 @@ class Images extends React.Component {
           <ImageWrapper key={image.id}>
             <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
             <button onClick={() => this.skip(image.id)}>スキップ {image.id}</button>
-            <Image><img src={image.filename} /></Image>
+            <Image><img src={image.thumbnailUrl} /></Image>
           </ImageWrapper>
         ))}
       </div>

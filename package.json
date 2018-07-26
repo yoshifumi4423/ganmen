@@ -29,6 +29,7 @@
     "sequelize": "^4.33.3",
     "sequelize-cli": "^4.0.0",
     "session-file-store": "^1.2.0",
+    "sharp": "^0.20.5",
     "styled-components": "^3.3.0"
   },
   "devDependencies": {

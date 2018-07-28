@@ -12,6 +12,7 @@ const imagesRouter = require('./routes/images')
 const authRouter = require('./routes/auth')
 const apiRouter = require('./routes/api')
 const profileRouter = require('./routes/profile')
+const accountRouter = require('./routes/account')
 
 app.set('view engine', 'ejs')
 
@@ -28,6 +29,7 @@ app.use('/images', imagesRouter)
 app.use('/', authRouter)
 app.use('/api', apiRouter)
 app.use('/profile', profileRouter)
+app.use('/account', accountRouter)
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("server listen")

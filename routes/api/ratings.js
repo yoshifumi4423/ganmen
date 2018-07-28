@@ -20,7 +20,7 @@ router.post('/like', auth, function(req, res){
 })
 
 router.post('/skip', auth, (req, res) => {
-  if(!req.user){
+  if (!req.user) {
     return res.json({result: false})
   }
 

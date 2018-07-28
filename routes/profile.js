@@ -8,7 +8,11 @@ const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 const countries = require('../middlewares/countries')
 
-router.get('/', auth, loginChecker, countries, (req, res) => {
+router.use(auth)
+router.use(loginChecker)
+router.use(countries)
+
+router.get('/', (req, res) => {
   res.render('profile', {
     form: req.user,
     countries: req.countries,
@@ -16,7 +20,7 @@ router.get('/', auth, loginChecker, countries, (req, res) => {
   })
 })
 
-router.post('/', auth, loginChecker, countries, (req, res) => {
+router.post('/', (req, res) => {
   req.user.update({
     birthday: req.body.birthday,
     gender: req.body.gender,

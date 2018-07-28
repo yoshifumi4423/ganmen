@@ -3,7 +3,9 @@ const router = express.Router()
 const models = require('../../models')
 const auth = require('../../middlewares/auth')
 
-router.post('/like', auth, function(req, res){
+router.use(auth)
+
+router.post('/like', function(req, res){
   if (!req.user) {
     return res.json({result: false})
   }
@@ -19,7 +21,7 @@ router.post('/like', auth, function(req, res){
   })
 })
 
-router.post('/skip', auth, (req, res) => {
+router.post('/skip', (req, res) => {
   if (!req.user) {
     return res.json({result: false})
   }

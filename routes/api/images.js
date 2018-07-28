@@ -3,7 +3,9 @@ const router = express.Router()
 const models = require('../../models')
 const auth = require('../../middlewares/auth')
 
-router.get('/images', auth, (req, res) => {
+router.use(auth)
+
+router.get('/images', (req, res) => {
   models.Image.findAll({
     where: {
       // 条件1：自分の画像でない

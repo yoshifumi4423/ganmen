@@ -5,15 +5,18 @@ const upload = require('../middlewares/upload')
 const loginChecker = require('../middlewares/loginChecker')
 const router = express.Router()
 
-router.get('/', auth, loginChecker, (req, res) => {
+router.use(auth)
+router.use(loginChecker)
+
+router.get('/', (req, res) => {
   res.render('images/index')
 })
 
-router.get('/new', auth, loginChecker, (req, res) => {
+router.get('/new', (req, res) => {
   res.render('images/new')
 })
 
-router.post('/', auth, loginChecker, upload, function(req, res){
+router.post('/', upload, function(req, res){
   req.file.userId = req.user.id
   models.Image.create(req.file).then(function(image){
     res.send('res_send')

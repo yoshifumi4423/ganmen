@@ -13,7 +13,7 @@ router.get('/new', auth, loginChecker, (req, res) => {
   res.render('images/new')
 })
 
-router.post('/new', auth, loginChecker, upload, function(req, res){
+router.post('/', auth, loginChecker, upload, function(req, res){
   req.file.userId = req.user.id
   models.Image.create(req.file).then(function(image){
     res.send('res_send')

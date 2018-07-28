@@ -13,11 +13,10 @@ router.get('/', auth, (req, res) => {
     form: {
       email: req.user.email,
     },
-    errors: []
   })
 })
 
-router.post('/email', auth, (req, res) => {
+router.post('/email', auth, (req, res, next) => {
   if (!req.user) {
     return res.send('error: please login.')
   }
@@ -30,9 +29,8 @@ router.post('/email', auth, (req, res) => {
       form: {
         email: userObj.dataValues.email,
       },
-      errors: []
     })
-  })
+  }).catch(next)
 })
 
 router.post('/password', auth, (req, res, next) => {
@@ -44,34 +42,30 @@ router.post('/password', auth, (req, res, next) => {
   const newPw = req.body.newPassword
   const newPwConfirmation = req.body.newPasswordConfirmation
 
-  if (!currentPw && !newPw && !newPwConfirmation) {
-    req.errors = ["正しい現在のパスワードを入力してください。"]
-    return next()
-  }
+  bcrypt.compare(currentPw, req.user.password)
+    .then((same) => {
+      req.errors = []
 
-  bcrypt.compare(currentPw, req.user.password).then((same) => {
-    if (!same) {
-      req.errors = ["正しい現在のパスワードを入力してください。"]
-      return next()
+      if (!same) {
+        req.errors.push(["正しい現在のパスワードを入力してください。"])
       }
-    else if (newPw.length < 8 || newPwConfirmation < 8) {
-      req.errors = ["新しいパスワードを8文字以上で入力してください。"]
-      return next()
-    }
-    else if (newPw !== newPwConfirmation) {
-      req.errors = ["新しいパスワードと新しいパスワードの確認を等しくしてください。"]
-      return next()
-    }
+      if (newPw.length < 8 || newPwConfirmation < 8) {
+        req.errors.push(["新しいパスワードを8文字以上で入力してください。"])
+      }
+      if (newPw !== newPwConfirmation) {
+        req.errors.push(["新しいパスワードと新しいパスワードの確認を等しくしてください。"])
+      }
+      if (req.errors.length) return next()
 
-    bcrypt.hash(newPw, 10).then((hash) => {
-      req.user.update({
+      return bcrypt.hash(newPw, 10)
+    })
+    .then((hash) => {
+      return req.user.update({
         password: hash
-      }).then((userObj) => {
-        req.errors = []
-        return next()
       })
     })
-  })
+    .then(() => next())
+    .catch(next)
 }, (req, res) => {
   res.render('account', {
     form: {

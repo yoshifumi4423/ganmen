@@ -1,4 +1,6 @@
 'use strict'
+const models = require('../models')
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     email: {
@@ -21,24 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: "誕生日を入力してください。"
-        }
+        },
       }
     },
     gender: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: "性別を入力してください。"
-        }
-      }
+      type: DataTypes.ENUM,
+      values: ['man', 'woman'],
     },
     countryId: {
       type: DataTypes.INTEGER,
-      validate: {
-        notEmpty: {
-          msg: "国を入力してください。"
-        }
-      }
     }
   }, {})
   User.associate = (models) => {

@@ -29,19 +29,9 @@ module.exports = (sequelize, DataTypes) => {
     gender: {
       type: DataTypes.ENUM,
       values: ['man', 'woman'],
-      validate: {
-        notEmpty: {
-          msg: "性別を入力してください。"
-        },
-      }
     },
     countryId: {
       type: DataTypes.INTEGER,
-      validate: {
-        notEmpty: {
-          msg: "国を選択してください。"
-        },
-      }
     }
   }, {})
   User.associate = (models) => {

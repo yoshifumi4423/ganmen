@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
   })
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   req.user.update({
     birthday: req.body.birthday,
     gender: req.body.gender,
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
       countries: req.countries,
       errors: []
     })
-  })
+  }).catch(errorObj => next(errorObj))
 })
 
 module.exports = router

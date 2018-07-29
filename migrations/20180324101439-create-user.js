@@ -22,7 +22,8 @@ module.exports = {
       },
       gender: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.ENUM,
+        values: ['man', 'woman']
       },
       countryId: {
         allowNull: false,

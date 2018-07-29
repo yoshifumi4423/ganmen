@@ -13,6 +13,7 @@ router.get('/', auth, (req, res) => {
     form: {
       email: req.user.email,
     },
+    errors: []
   })
 })
 
@@ -29,6 +30,7 @@ router.post('/email', auth, (req, res, next) => {
       form: {
         email: userObj.dataValues.email,
       },
+      errors: []
     })
   }).catch(next)
 })

@@ -24,25 +24,15 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: "誕生日を入力してください。"
         },
-        isBetween1900AndToday(value) {
-          const birthday = new Date(value.replace(/-/, '/'))
-          const jan1st1900 = new Date('1900/1/1')
-          const today = new Date()
-          
-          if (birthday < jan1st1900 || birthday > today) throw new Error("誕生日を入力してください。")
-        }
       }
     },
     gender: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
+      values: ['man', 'woman'],
       validate: {
         notEmpty: {
           msg: "性別を入力してください。"
         },
-        isIn: {
-          args: [['man', 'woman']],
-          msg: "Man か Woman のどちらかを選択してください。"
-        }
       }
     },
     countryId: {
@@ -51,11 +41,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: "国を選択してください。"
         },
-        isCountryId(value) {
-//          models.Country.findById(value).then((country) => {
-//            throw new Error("国を選択してください。")
-//          })
-        }
       }
     }
   }, {})

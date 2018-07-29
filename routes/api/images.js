@@ -31,5 +31,4 @@ router.get('/images', auth, (req, res) => {
   })
 })
 
-
 module.exports = router

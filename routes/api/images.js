@@ -21,18 +21,9 @@ router.get('/images', auth, (req, res, next) => {
     include: [{
       model: models.Rating,
       required: false,  // left outer join
-      where: {
-        // 条件3：未評価の画像
-        userId: {
-          $or: {
-            $not: req.user.id,
-            $eq: null,
-          }
-        }, 
-      }
     }],
     subQuery: false,
-    // 条件4：10個
+    // 条件3：10個
     limit: 10,
   }).then((images) => {
     res.json({images: images})

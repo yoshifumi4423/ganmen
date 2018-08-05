@@ -6,23 +6,25 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
 
     // Users
-    const userPromises = []
-    for (let i = 0; i < 100; i++) {
-      userPromises[i] = bcrypt.hash(`user${i}password`, 10).then((hash) => {
-        const now = new Date()
-      
-        return models.User.create({
-          email: `user${i}@example.com`,
-          password: hash,
-          birthday: '2018-01-01',
-          gender: 'man',
-          countryId: i,
-          createdAt: now,
-          updatedAt: now,
+    return models.Country.findAll().then(countries => {
+      const promises = []
+      for (let i = 0; i < 100; i++) {
+        promises[i] = bcrypt.hash(`user${i}password`, 10).then((hash) => {
+          const now = new Date()
+        
+          return models.User.create({
+            email: `user${i}@example.com`,
+            password: hash,
+            birthday: '2018-01-01',
+            gender: 'man',
+            countryId: countries[i].id,
+            createdAt: now,
+            updatedAt: now,
+          })
         })
-      })  
-    }
-    return Promise.all(userPromises).then(users => {
+      }
+      return Promise.all(promises)
+    }).then(users => {
 
       // Images
       const imagePromises = []

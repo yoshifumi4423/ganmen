@@ -38,10 +38,16 @@ module.exports = {
         type: Sequelize.DATE
       }
     }).then(() => {
-      return queryInterface.addIndex("Users", {
+      return queryInterface.addIndex('Users', {
         fields: ['email'],
         unique: true
-      })
+      }).then(queryInterface.addConstraint('Users', ['countryId'], {
+        type: 'foreign key',
+        references: {
+          table: 'Countries',
+          field: 'id'
+        }
+      }))
     })
   },
   down: (queryInterface, Sequelize) => {

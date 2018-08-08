@@ -1,6 +1,12 @@
 <html>
   <head>集計</head>
+  <br>
   <body>
-    <p>like率: <%= form.likeRate %>%</p>
+    <% if (form.summaries) {
+      form.summaries.forEach(summary => { %>
+        <img src="<%= summary.thumbnailUrl %>">
+        <p>like率: <%= summary.likeRate %></p>
+      <% })
+    } %>
   </body>
 </html>

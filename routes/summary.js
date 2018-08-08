@@ -3,51 +3,75 @@ const router = express.Router()
 const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 const models = require('../models')
-const sequelize = require('sequelize')
+const Sequelize = require('sequelize')
+const sequelize = new Sequelize('test', 'yoshifumikanno', '', {
+  host: 'localhost',
+  dialect: 'postgres'
+})
 
-router.use(auth)
-router.use(loginChecker)
-
-router.get('/', (req, res, next) => {
-  models.Rating.findAll({
-    // 条件1：集計関数でlikeを取得する
-    attributes: [
-      'like',
-      [sequelize.fn('count', sequelize.col('like')), 'likeCount']
-    ],
-    group: [
-      'like'
-    ],
-    // 条件2：ユーザーIDと一致する
-    where: {
-      userId: {
-        $eq: req.user.id
-      }
+router.get('/', auth, loginChecker, (req, res, next) => {
+  sequelize.query(
+    `select
+      "Images"."thumbnailUrl",
+      case
+        when coalesce("TotalRating"."count", 0) = 0 then '0%'
+      else
+       concat(round(coalesce("TotalLike"."count", 0.0) / "TotalRating"."count" * 100), '%')
+      end as "likeRate"
+    from
+      "Images"
+    left outer join
+      (
+        select
+          "thumbnailUrl", count("like") as "count"
+        from
+          "Images"
+        inner join
+          "Ratings"
+        on
+          "Images".id = "Ratings"."imageId"
+        where
+          "Images"."userId" = 230 and "like" = 't'
+        group by
+          "thumbnailUrl"
+      ) as "TotalLike"
+    on
+      "Images"."thumbnailUrl" = "TotalLike"."thumbnailUrl"
+    inner join
+      (
+        select
+          "thumbnailUrl", count("like") as "count"
+        from
+          "Images"
+        inner join
+          "Ratings"
+        on
+          "Images".id = "Ratings"."imageId"
+        where
+          "Images"."userId" = 230
+        group by
+          "thumbnailUrl"
+      ) as "TotalRating"
+    on
+      "Images"."thumbnailUrl" = "TotalRating"."thumbnailUrl"
+    where
+      "Images"."userId" = 230
+    group by
+      "Images"."thumbnailUrl", "TotalLike"."count", "TotalRating"."count"`,
+    {
+        replacements: {
+          userId: req.user.id
+        },
+        type: Sequelize.QueryTypes.SELECT
     }
-  }).then(ratings => {
-    if (!ratings || ratings.length === 0) {
-      req.likeRate = 0
-      next()
-    }
-
-    let like
-    let skip
-    ratings.forEach(rating => {
-      if (rating.like) {
-        like = Number(rating.get('likeCount'))
-      } else {
-        skip = Number(rating.get('likeCount'))
-      }
-    })
-    const total = like + skip
-
-    req.likeRate = (total === 0) ? 0 : Math.round((like / total) * 100)
+  ).then(summaries => {
+    req.summaries = summaries
     next()
   }).catch(errorObj => next(errorObj))
 }, (req, res) => {
   res.render('summary', {
     form: {
-      likeRate: req.likeRate,
+      summaries: req.summaries
     }
   })
 })

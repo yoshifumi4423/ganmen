@@ -31,7 +31,7 @@ router.get('/', auth, loginChecker, (req, res, next) => {
         on
           "Images".id = "Ratings"."imageId"
         where
-          "Images"."userId" = 230 and "like" = 't'
+          "Images"."userId" = :userId and "like" = 't'
         group by
           "thumbnailUrl"
       ) as "TotalLike"
@@ -48,7 +48,7 @@ router.get('/', auth, loginChecker, (req, res, next) => {
         on
           "Images".id = "Ratings"."imageId"
         where
-          "Images"."userId" = 230
+          "Images"."userId" = :userId
         group by
           "thumbnailUrl"
       ) as "TotalRating"

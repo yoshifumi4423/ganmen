@@ -15,6 +15,7 @@ const logoutRouter = require('./routes/logout')
 const apiRouter = require('./routes/api')
 const profileRouter = require('./routes/profile')
 const accountRouter = require('./routes/account')
+const summaryRouter = require('./routes/summary')
 
 app.set('view engine', 'ejs')
 
@@ -34,6 +35,7 @@ app.use('/logout', logoutRouter)
 app.use('/api', apiRouter)
 app.use('/profile', profileRouter)
 app.use('/account', accountRouter)
+app.use('/summary', summaryRouter)
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("server listen")

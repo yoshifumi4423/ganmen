@@ -2,11 +2,16 @@
   <head>集計</head>
   <br>
   <body>
-    <% if (form.summaries) {
-      form.summaries.forEach(summary => { %>
+    <% const summaries = form.summaries
+    if (summaries) {
+      if (summaries.length > 0) {
+      summaries.forEach(summary => { %>
         <img src="<%= summary.thumbnailUrl %>">
         <p>like率: <%= summary.likeRate %></p>
       <% })
+      } else if (summaries.length === 0) { %>
+      <p>投稿された画像がありません。</p>
+    <% }
     } %>
   </body>
 </html>

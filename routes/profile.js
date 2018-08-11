@@ -31,7 +31,7 @@ router.post('/', (req, res, next) => {
       countries: req.countries,
       errors: []
     })
-  }).catch(errorObj => next(errorObj))
+  }).catch(next)
 })
 
 module.exports = router

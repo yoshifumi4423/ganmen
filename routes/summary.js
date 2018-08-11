@@ -67,7 +67,7 @@ router.get('/', auth, loginChecker, (req, res, next) => {
   ).then(summaries => {
     req.summaries = summaries
     next()
-  }).catch(errorObj => next(errorObj))
+  }).catch(next)
 }, (req, res) => {
   res.render('summary', {
     form: {

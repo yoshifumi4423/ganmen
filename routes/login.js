@@ -10,7 +10,7 @@ const AppError = require('../errors/AppError')
 router.use(auth)
 router.use(logoutChecker)
 
-router.get('/', function(req, res){	
+router.get('/', (req, res) => {	
   console.log("session : ", req.session.user)	
   res.render('login', {	
     form: {},	
@@ -18,13 +18,13 @@ router.get('/', function(req, res){
   })	
 })
 
-router.post('/', function(req, res, next){	
+router.post('/', (req, res, next) => {	
   console.log("session : ", req.session.user)	
   models.User.findOne({	
     where:{	
       email: req.body.email	
     }
-  }).then((user) => {
+  }).then(user => {
     if (!user) {	
       throw new AppError("メールアドレスまたはパスワードが間違っています。")	
     }	
@@ -35,7 +35,7 @@ router.post('/', function(req, res, next){
        req.session.user_id = user.id	
       res.send('res_send')	
     })
-  }).catch((errorObj) => {
+  }).catch(errorObj => {
     if (errorObj.name === 'AppError') {	
       return res.render('login', {	
         form: {	

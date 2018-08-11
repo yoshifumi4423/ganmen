@@ -4,7 +4,7 @@ const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 const router = express.Router()
 
-router.get('/', auth, loginChecker, function(req, res){
+router.get('/', auth, loginChecker, (req, res) => {
   req.session.destroy()
   res.send('res_send')
 })

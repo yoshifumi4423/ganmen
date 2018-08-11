@@ -37,16 +37,12 @@ app.use('/profile', profileRouter)
 app.use('/account', accountRouter)
 app.use('/summary', summaryRouter)
 
-app.listen(process.env.PORT || 3000, function(){
+app.listen(process.env.PORT || 3000, () => {
   console.log("server listen")
 })
 
-app.get('/', function(req, res){
-  models.Image.findAll().then(function(images){
-    res.render('index', {
-      images: images
-    })
-  })
+app.get('/', (req, res) => {
+  res.render('index')
 })
 
 app.use((errorObj, req, res, next) => {

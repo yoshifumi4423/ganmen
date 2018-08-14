@@ -27,7 +27,7 @@ router.get('/images', auth, (req, res, next) => {
     limit: 10,
   }).then((images) => {
     res.json({images: images})
-  }).catch(errorObj => next(errorObj))
+  }).catch(next)
 })
 
 module.exports = router

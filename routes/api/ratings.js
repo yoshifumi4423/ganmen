@@ -5,7 +5,7 @@ const auth = require('../../middlewares/auth')
 
 router.use(auth)
 
-router.post('/like', function(req, res, next){
+router.post('/like', (req, res, next) => {
   if (!req.user) {
     return res.json({result: false})
   }
@@ -14,7 +14,7 @@ router.post('/like', function(req, res, next){
     like: true,
     userId: req.user.id,
     imageId: req.body.imageId
-  }).then((rating) => {
+  }).then(rating => {
     res.json({result: true})
   }).catch(next)
 })
@@ -28,7 +28,7 @@ router.post('/skip', (req, res, next) => {
     like: false,
     userId: req.user.id,
     imageId: req.body.imageId
-  }).then((rating) => {
+  }).then(rating => {
     res.json({result: true})
   }).catch(next)
 })

@@ -11,7 +11,7 @@ router.use(auth)
 router.use(logoutChecker)
 router.use(countries)
 
-router.get('/', function(req, res){
+router.get('/', (req, res) => {
   res.render('signup', {
     form: {},
     countries: req.countries,
@@ -19,7 +19,7 @@ router.get('/', function(req, res){
   })
 })
 
-router.post('/', function(req, res, next){
+router.post('/', (req, res, next) => {
   const pw = req.body.password
   if(!pw){
     return res.render('signup', {
@@ -35,17 +35,17 @@ router.post('/', function(req, res, next){
     })
   }
 
-  bcrypt.hash(pw, 10).then((hash) => {
+  bcrypt.hash(pw, 10).then(hash => {
     models.User.create({
       email: req.body.email,
       password: hash,
       birthday: req.body.birthday,
       gender: req.body.gender,
       countryId: req.body.countryId,
-    }).then((user) => {
+    }).then(user => {
       // ToDo: サインアップ後にログインできているかチェックする。
       res.redirect('/')
-    }).catch((errorObj) => {
+    }).catch(errorObj => {
       if(errorObj.name === 'SequelizeValidationError' ||
          errorObj.name === 'SequelizeUniqueConstraintError'){
           return res.render('signup', {

@@ -16,11 +16,11 @@ router.get('/new', (req, res) => {
   res.render('images/new')
 })
 
-router.post('/', upload, function(req, res){
+router.post('/', upload, (req, res, next) => {
   req.file.userId = req.user.id
   models.Image.create(req.file).then(function(image){
     res.send('res_send')
-  })
+  }).catch(next)
 })
 
 module.exports = router

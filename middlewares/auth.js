@@ -9,7 +9,7 @@ const auth = (req, res, next) => {
   models.User.findById(id).then(user => {
     req.user = user
     next()
-  })
+  }).catch(next)
 }
 
 module.exports = auth

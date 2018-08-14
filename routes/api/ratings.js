@@ -16,7 +16,7 @@ router.post('/like', function(req, res, next){
     imageId: req.body.imageId
   }).then((rating) => {
     res.json({result: true})
-  }).catch(errorObj => next(errorObj))
+  }).catch(next)
 })
 
 router.post('/skip', (req, res, next) => {
@@ -30,7 +30,7 @@ router.post('/skip', (req, res, next) => {
     imageId: req.body.imageId
   }).then((rating) => {
     res.json({result: true})
-  }).catch(errorObj => next(errorObj))
+  }).catch(next)
 })
 
 

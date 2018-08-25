@@ -1,7 +1,13 @@
 <html>
-  <head>集計</head>
-  <br>
+  <head>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/common.css">
+  </head>
   <body>
+    <% include header %>
+
+    <h1>集計</h1>
+    
     <% if (form.summaries) {
       form.summaries.forEach(summary => { %>
         <img src="<%= summary.thumbnailUrl %>">

@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express')
 const models = require('../models')
 const auth = require('../middlewares/auth')

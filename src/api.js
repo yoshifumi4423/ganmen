@@ -1,3 +1,4 @@
+'use strict'
 export const fetchImages = () => {
   return fetch('/api/images', {
     credentials: "same-origin"

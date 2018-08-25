@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(express.static('uploads'))
 app.use(express.static('dist'))
+app.use(express.static('css'))
 app.use(session({
   store: new sessionFileStore(),
   secret: 'keyboard cat',

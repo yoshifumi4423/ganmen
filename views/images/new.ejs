@@ -1,6 +1,13 @@
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/common.css">
+  </head>
   <body>
+    <% include ../header %>
+
+    <h1>画像投稿</h1>
+    
     <div>
       <form action="/images" method="POST" enctype="multipart/form-data">
         <input type="file" name="faceImage">

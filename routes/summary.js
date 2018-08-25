@@ -37,7 +37,7 @@ router.get('/', auth, loginChecker, (req, res, next) => {
       ) as "TotalLike"
     on
       "Images"."thumbnailUrl" = "TotalLike"."thumbnailUrl"
-    inner join
+    left outer join
       (
         select
           "thumbnailUrl", count("like") as "count"
@@ -55,7 +55,7 @@ router.get('/', auth, loginChecker, (req, res, next) => {
     on
       "Images"."thumbnailUrl" = "TotalRating"."thumbnailUrl"
     where
-      "Images"."userId" = 230
+      "Images"."userId" = :userId
     group by
       "Images"."thumbnailUrl", "TotalLike"."count", "TotalRating"."count"`,
     {

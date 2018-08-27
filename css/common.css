@@ -14,3 +14,11 @@ header .menu {
     display: block; }
     header .menu li a:hover {
       background-color: grey; }
+
+.container {
+  min-width: 1024px;
+  margin-top: 40px;
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; }

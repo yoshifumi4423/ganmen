@@ -6,13 +6,14 @@
   <body>
     <% include header %>
 
-    <h1>集計</h1>
-    
-    <% if (form.summaries) {
-      form.summaries.forEach(summary => { %>
-        <img src="<%= summary.thumbnailUrl %>">
-        <p>like率: <%= summary.likeRate %></p>
-      <% })
-    } %>
+    <div class="container">
+      <h1>集計</h1>
+      <% if (form.summaries) {
+        form.summaries.forEach(summary => { %>
+          <img src="<%= summary.thumbnailUrl %>">
+          <p>like率: <%= summary.likeRate %></p>
+        <% })
+      } %>
+    </div>
   </body>
 </html>

@@ -5,22 +5,22 @@
   </head>
   <body>
     <% include header %>
-    
-    <h1>ログイン</h1>
-    
-    <form action="/login" method="POST">
-      <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-      <br>
-      <input type="password" name="password" placeholder="password">
-      <br>
-      <button type="submit">ログイン</button>
-    </form>
-  
-    <% if (errors) {
-      errors.forEach((error) => { %>
-        <p><%= error %></p>
-      <% })
-    } %>
+
+    <div class="container">
+      <h1>ログイン</h1>
+      <form action="/login" method="POST">
+        <input type="text" name="email" placeholder="email" value="<%= form.email %>">
+        <br>
+        <input type="password" name="password" placeholder="password">
+        <br>
+        <button type="submit">ログイン</button>
+      </form>
+
+      <% if (errors) {
+        errors.forEach((error) => { %>
+          <p><%= error %></p>
+        <% })
+      } %>
+    </div>
   </body>
 </html>
-      

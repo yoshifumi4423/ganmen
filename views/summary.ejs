@@ -6,18 +6,19 @@
   <body>
     <% include header %>
 
-    <h1>集計</h1>
-
-    <% const summaries = form.summaries
-    if (summaries) {
-      if (summaries.length > 0) {
-      summaries.forEach(summary => { %>
-        <img src="<%= summary.thumbnailUrl %>">
-        <p>like率: <%= summary.likeRate %></p>
-      <% })
-      } else if (summaries.length === 0) { %>
-      <p>投稿された画像がありません。</p>
-    <% }
-    } %>
+    <div class="container">
+      <h1>集計</h1>
+      <% const summaries = form.summaries
+      if (summaries) {
+        if (summaries.length > 0) {
+        summaries.forEach(summary => { %>
+          <img src="<%= summary.thumbnailUrl %>">
+          <p>like率: <%= summary.likeRate %></p>
+        <% })
+        } else if (summaries.length === 0) { %>
+        <p>投稿された画像がありません。</p>
+      <% }
+      } %>
+    </div>
   </body>
 </html>

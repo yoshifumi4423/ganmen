@@ -6,35 +6,36 @@
   <body>
     <% include header %>
     
-    <h1>サインアップ</h1>
-    
-    <form action="/signup" method="POST">
-      <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-      <br><br>
-      <input type="password" name="password" placeholder="password" value="">
-      <br><br>
-      <input type="date" name="birthday" value="<%= form.birthday %>">
-      <br><br>
-      <select name="gender">
-        <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
-        <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
-      </select>
-      <br><br>
-      <select name="countryId">
-        <% countries.forEach((country) => { %>
-          <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId) ? 'selected' : '' %> >
-            <%= country.name %>
-          </option>
-        <% }) %>
-      </select>
-      <br><br>
-      <button type="submit">サインアップ</button>
-    </form>
+    <div class="container">
+      <h1>サインアップ</h1>
+      <form action="/signup" method="POST">
+        <input type="text" name="email" placeholder="email" value="<%= form.email %>">
+        <br><br>
+        <input type="password" name="password" placeholder="password" value="">
+        <br><br>
+        <input type="date" name="birthday" value="<%= form.birthday %>">
+        <br><br>
+        <select name="gender">
+          <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
+          <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
+        </select>
+        <br><br>
+        <select name="countryId">
+          <% countries.forEach((country) => { %>
+            <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId) ? 'selected' : '' %> >
+              <%= country.name %>
+            </option>
+          <% }) %>
+        </select>
+        <br><br>
+        <button type="submit">サインアップ</button>
+      </form>
 
-    <% if(errors) {
-      errors.forEach((error) => { %>
-        <p><%= error %></p>
-      <% })
-    } %>
+      <% if(errors) {
+        errors.forEach((error) => { %>
+          <p><%= error %></p>
+        <% })
+      } %>
+    </div>
   </body>
 </html>

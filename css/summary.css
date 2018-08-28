@@ -1,0 +1,14 @@
+main {
+  min-width: 1024px;
+  margin-top: 40px;
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center; }
+  main h1 {
+    margin: 40px 40px;
+    font-weight: bold; }
+  main .summaries {
+    margin: 40px 40px; }

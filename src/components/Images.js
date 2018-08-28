@@ -9,7 +9,12 @@ const Image = styled.div`
   }
 `
 const ImageWrapper = styled.div`
+  margin-bottom: 10px;
   width: 500px;
+`
+
+const Content = styled.div`
+  margin: 40px 40px;
 `
 
 // reactのcomponent
@@ -72,7 +77,7 @@ class Images extends React.Component {
   
   render() {
     return (
-      <div>
+      <Content>
         {this.state.images.map((image) => (
           <ImageWrapper key={image.id}>
             <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
@@ -80,7 +85,7 @@ class Images extends React.Component {
             <Image><img src={image.thumbnailUrl} /></Image>
           </ImageWrapper>
         ))}
-      </div>
+      </Content>
     )
   }
 }

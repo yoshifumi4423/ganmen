@@ -2,6 +2,7 @@
   <head>
     <link rel="stylesheet" href="/reset.css">
     <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/login.css">
   </head>
   <body>
     <% include header %>
@@ -15,12 +16,13 @@
         <br>
         <button type="submit">ログイン</button>
       </form>
-
-      <% if (errors) {
-        errors.forEach((error) => { %>
-          <p><%= error %></p>
-        <% })
-      } %>
+      <div class="errors">
+        <% if (errors) {
+          errors.forEach((error) => { %>
+            <p><%= error %></p>
+          <% })
+        } %>
+      </div>
     </main>
   </body>
 </html>

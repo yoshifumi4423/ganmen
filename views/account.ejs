@@ -5,13 +5,13 @@
   <body>
     <% include header %>
 
-    <div class="container">
+    <main>
       <h1>アカウント変更</h1>
       <form action="/account/email" method="POST">
         <input type="email" name="email" placeholder="email" value="<%= form.email %>">
-        <br><br>
+        <br>
         <button type="submit">メールアドレスを変更</button>
-        <br><br>
+        <br>
       </form>
       <form action="/account/password" method="POST">
         <input type="password" name="currentPassword" placeholder="現在のpassword">
@@ -19,7 +19,7 @@
         <input type="password" name="newPassword" placeholder="新しいパスワード">
         <br>
         <input type="password" name="newPasswordConfirmation" placeholder="新しいパスワードの確認">
-        <br><br>
+        <br>
         <button type="submit">パスワードを変更</button>
       </form>
 
@@ -28,6 +28,6 @@
           <p><%= error %></p>
         <% })
       } %>
-    </div>
+    </main>
   </body>
 </html>

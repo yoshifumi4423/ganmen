@@ -6,7 +6,7 @@
   <body>
     <% include header %>
 
-    <div class="container">
+    <main>
       <h1>ログイン</h1>
       <form action="/login" method="POST">
         <input type="text" name="email" placeholder="email" value="<%= form.email %>">
@@ -21,6 +21,6 @@
           <p><%= error %></p>
         <% })
       } %>
-    </div>
+    </main>
   </body>
 </html>

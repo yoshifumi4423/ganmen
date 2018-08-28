@@ -6,20 +6,20 @@
   <body>
     <% include header %>
     
-    <div class="container">
+    <main>
       <h1>サインアップ</h1>
       <form action="/signup" method="POST">
         <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-        <br><br>
+        <br>
         <input type="password" name="password" placeholder="password" value="">
-        <br><br>
+        <br>
         <input type="date" name="birthday" value="<%= form.birthday %>">
-        <br><br>
+        <br>
         <select name="gender">
           <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
           <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
         </select>
-        <br><br>
+        <br>
         <select name="countryId">
           <% countries.forEach((country) => { %>
             <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId) ? 'selected' : '' %> >
@@ -27,7 +27,7 @@
             </option>
           <% }) %>
         </select>
-        <br><br>
+        <br>
         <button type="submit">サインアップ</button>
       </form>
 
@@ -36,6 +36,6 @@
           <p><%= error %></p>
         <% })
       } %>
-    </div>
+    </main>
   </body>
 </html>

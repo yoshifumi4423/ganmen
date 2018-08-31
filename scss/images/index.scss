@@ -1,19 +1,20 @@
 main {
-  min-width: 1024px;
-  margin-top: 40px;
-  background-color: lightgoldenrodyellow;
-  display: flex;
-  // 縦に積む
-  flex-direction: column;
-  flex-wrap: wrap;
-  // 中央寄せ
-  justify-content: center;
-  align-items: center;
-  
-  h1 {
-    margin: 40px 40px;
-    font-weight: bold;
-  }
+  section {
+    margin: 60px auto 0;
+    max-width: 935px;
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 
-  // コンテンツはReact側で調整する
+    article {
+      h1 {
+        margin: 40px 40px;
+        font-weight: bold;
+      }
+    
+      // コンテンツはReact側で調整する
+    }
+  }
 }

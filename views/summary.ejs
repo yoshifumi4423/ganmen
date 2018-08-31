@@ -5,18 +5,31 @@
     <link rel="stylesheet" href="/summary.css">
   </head>
   <body>
-    <% include header %>
+    <div class="container">
+    <%- include("header", {
+      form: {
+        logoUrl: "logo_shape.png",
+        active: "summary"
+      }
+    }) %>
 
     <main>
-      <h1>集計</h1>
-      <div class="summaries">
-        <% if (form.summaries) {
-          form.summaries.forEach(summary => { %>
-            <img src="<%= summary.thumbnailUrl %>">
-            <p>like率: <%= summary.likeRate %></p>
-          <% })
-        } %>
-      </div>
+      <section>
+        <article>
+          <h1>集計</h1>
+          <div class="summaries">
+            <% if (form.summaries) {
+              form.summaries.forEach(summary => { %>
+                <img src="<%= summary.thumbnailUrl %>">
+                <p>like率: <%= summary.likeRate %></p>
+              <% })
+            } %>
+          </div>
+        </article>
+      </section>
     </main>
+
+    <%- include("footer", {}) %>
+    </div>
   </body>
 </html>

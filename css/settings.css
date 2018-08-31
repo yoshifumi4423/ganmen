@@ -11,11 +11,11 @@ main section {
   main section article h1 {
     margin: 40px 40px;
     font-weight: bold; }
-  main section article form {
+  main section article ul {
     margin: 40px 40px; }
-    main section article form input {
+    main section article ul li {
       margin-bottom: 10px; }
-    main section article form button {
-      margin-top: 20px; }
-  main section article .errors p {
-    margin-bottom: 10px; }
+      main section article ul li a {
+        color: #999999; }
+        main section article ul li a:hover {
+          color: #003569; }

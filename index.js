@@ -17,6 +17,7 @@ const apiRouter = require('./routes/api')
 const profileRouter = require('./routes/profile')
 const accountRouter = require('./routes/account')
 const summaryRouter = require('./routes/summary')
+const settingsRouter = require('./routes/settings')
 
 app.set('view engine', 'ejs')
 
@@ -38,13 +39,18 @@ app.use('/api', apiRouter)
 app.use('/profile', profileRouter)
 app.use('/account', accountRouter)
 app.use('/summary', summaryRouter)
+app.use('/settings', settingsRouter)
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server listen")
 })
 
-app.get('/', (req, res) => {
-  res.render('index')
+app.get('/', auth, (req, res,) => {
+  if (req.user) {
+    res.render('images/index')
+  } else {
+    res.render('index')
+  }
 })
 
 app.use((errorObj, req, res, next) => {

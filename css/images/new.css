@@ -1,18 +1,17 @@
-main {
-  min-width: 1024px;
-  margin-top: 40px;
-  background-color: lightgoldenrodyellow;
+main section {
+  margin: 60px auto 0;
+  max-width: 935px;
+  width: 100%;
+  flex-grow: 1;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; }
-  main h1 {
+  flex-direction: row;
+  justify-content: center; }
+  main section article h1 {
     margin: 40px 40px;
     font-weight: bold; }
-  main form {
+  main section article form {
     margin: 40px 40px; }
-    main form input {
+    main section article form input {
       margin-bottom: 10px; }
-    main form button {
+    main section article form button {
       margin-top: 20px; }

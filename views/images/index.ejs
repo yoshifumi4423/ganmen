@@ -5,12 +5,25 @@
     <link rel="stylesheet" href="/images/index.css">
   </head>
   <body>
-    <% include ../header %>
+    <div class="container">
+      <%- include("../header", {
+        form: {
+          logoUrl: "../logo_shape.png",
+          active: "images"
+        }
+      }) %>
 
-    <main>
-      <h1>画像一覧</h1>
-      <div id="images"></div>
-      <script src="/main.js"></script>
-    </main>
+      <main>
+        <section>
+          <article>
+            <h1>画像一覧</h1>
+            <div id="images"></div>
+            <script src="/main.js"></script>
+          </article>
+        </section>
+      </main>
+
+      <%- include("../footer", {}) %>
+    </div>
   </body>
 </html>

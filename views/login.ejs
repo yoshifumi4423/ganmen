@@ -5,24 +5,31 @@
     <link rel="stylesheet" href="/login.css">
   </head>
   <body>
-    <% include header %>
+    <div class="container">
+      <main>
+        <section>
+          <article>
+            <img src="logo_shape.png"></img>
+            <h1>ログイン</h1>
+            <form action="/login" method="POST">
+              <input type="text" name="email" placeholder="email" value="<%= form.email %>">
+              <br>
+              <input type="password" name="password" placeholder="password">
+              <br>
+              <button type="submit">ログイン</button>
+            </form>
+            <div class="errors">
+              <% if (errors) {
+                errors.forEach((error) => { %>
+                  <p><%= error %></p>
+                <% })
+              } %>
+            </div>
+          </article>
+        </section>
+      </main>
 
-    <main>
-      <h1>ログイン</h1>
-      <form action="/login" method="POST">
-        <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-        <br>
-        <input type="password" name="password" placeholder="password">
-        <br>
-        <button type="submit">ログイン</button>
-      </form>
-      <div class="errors">
-        <% if (errors) {
-          errors.forEach((error) => { %>
-            <p><%= error %></p>
-          <% })
-        } %>
-      </div>
-    </main>
+      <%- include("footer", {}) %>
+    </div>
   </body>
 </html>

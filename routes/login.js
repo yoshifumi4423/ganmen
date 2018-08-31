@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
         throw new AppError("メールアドレスまたはパスワードが間違っています。")	
       }	
        req.session.user_id = user.id	
-      res.send('res_send')	
+      res.render('images/index')
     })
   }).catch(errorObj => {
     if (errorObj.name === 'AppError') {	

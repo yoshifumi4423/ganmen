@@ -1,20 +1,21 @@
-main {
-  min-width: 1024px;
-  margin-top: 40px;
-  background-color: lightgoldenrodyellow;
+main section {
+  margin: 60px auto 0;
+  max-width: 935px;
+  background-color: #ffffff;
+  border: 1px solid #dbdbdb;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center; }
-  main h1 {
-    margin: 40px 40px;
-    font-weight: bold; }
-  main form {
-    margin: 40px 40px; }
-    main form input, main form select {
+  flex-direction: row;
+  justify-content: center; }
+  main section article {
+    padding: 40px 40px; }
+    main section article h1 {
+      margin: 40px 40px;
+      font-weight: bold; }
+    main section article form {
+      margin: 40px 40px; }
+      main section article form input, main section article form select {
+        margin-bottom: 10px; }
+      main section article form button {
+        margin-top: 20px; }
+    main section article .errors p {
       margin-bottom: 10px; }
-    main form button {
-      margin-top: 20px; }
-  main .errors p {
-    margin-bottom: 10px; }

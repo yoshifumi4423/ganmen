@@ -8,7 +8,7 @@ export const fetchImages = () => {
 }
 
 export const fetchLike = (imageId) => {
-  return fetch('api/like', {
+  return fetch('../api/like', {
     headers:{
       'Content-Type': 'application/json'
     },
@@ -22,7 +22,7 @@ export const fetchLike = (imageId) => {
 }
 
 export const fetchSkip = (imageId) => {
-  return fetch('api/skip', {
+  return fetch('../api/skip', {
     headers: {
       'Content-Type': 'application/json'
     },

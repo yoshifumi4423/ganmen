@@ -2,19 +2,39 @@ import React, { Fragment } from "react"
 import styled from "styled-components"
 import { fetchImages, fetchLike, fetchSkip } from "../api"
 
+const Content = styled.div`
+  margin: 40px 40px;
+`
+const ImageWrapper = styled.div`
+  width: 500px;
+  display: flex;
+  flex-direction:column;
+  justify-content: flex-start;
+`
 const Image = styled.div`
   width: 100%;
   img {
     width: 100%;
   }
 `
-const ImageWrapper = styled.div`
-  margin-bottom: 10px;
-  width: 500px;
-`
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 
-const Content = styled.div`
-  margin: 40px 40px;
+  button {
+    border: 0;
+    padding: 10px;
+    background-color: #fafafa;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+    }
+  }
 `
 
 // reactのcomponent
@@ -80,9 +100,11 @@ class Images extends React.Component {
       <Content>
         {this.state.images.map((image) => (
           <ImageWrapper key={image.id}>
-            <button onClick={() => this.like(image.id)}>いいね {image.id}</button>
-            <button onClick={() => this.skip(image.id)}>スキップ {image.id}</button>
             <Image><img src={image.thumbnailUrl} /></Image>
+            <Buttons>
+              <button onClick={() => this.skip(image.id)}><img src="../skip.png" />{image.id}</button>
+              <button onClick={() => this.like(image.id)}><img src="../like_fill.png" />{image.id}</button>
+            </Buttons>
           </ImageWrapper>
         ))}
       </Content>

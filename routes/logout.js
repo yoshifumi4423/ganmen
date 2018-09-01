@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', auth, loginChecker, (req, res) => {
   req.session.destroy()
-  res.render('index')
+  res.redirect('../')
 })
 
 module.exports = router

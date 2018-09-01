@@ -47,7 +47,7 @@ app.listen(process.env.PORT || 3000, () => {
 
 app.get('/', auth, (req, res,) => {
   if (req.user) {
-    res.render('images/index')
+    res.redirect('../images')
   } else {
     res.render('index')
   }

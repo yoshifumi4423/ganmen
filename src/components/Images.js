@@ -4,10 +4,12 @@ import styled from "styled-components"
 import { fetchImages, fetchLike, fetchSkip } from "../api"
 
 const Content = styled.div`
+  position: relative;
+  width: inherit;
   margin: 40px 40px;
 `
 const ImageWrapper = styled.div`
-  width: 500px;
+  position: absolute;
   display: flex;
   flex-direction:column;
   justify-content: flex-start;
@@ -99,7 +101,7 @@ class Images extends React.Component {
   render() {
     return (
       <Content>
-        {this.state.images.map((image) => (
+        {this.state.images.reverse().map((image) => (
           <ImageWrapper key={image.id}>
             <Image><img src={image.thumbnailUrl} /></Image>
             <Buttons>

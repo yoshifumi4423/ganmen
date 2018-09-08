@@ -1,31 +1,52 @@
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/profile.css">
+  </head>
   <body>
-    <h1>プロフィール変更</h1>
+    <div class="container">
+      <%- include("header", {
+        form: {
+          logoUrl: "logo_shape.png",
+          active: "profile"
+        }
+      }) %>
+      
+      <main>
+        <section>
+          <article>
+            <h1>プロフィール変更</h1>
+            <form action="/profile" method="POST">
+              <input type="date" name="birthday" value="<%= form.birthday %>">
+              <br>
+              <select name="gender">
+                <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
+                <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
+              </select>
+              <br>
+              <select name="countryId">
+                <% countries.forEach((country) => { %>
+                  <option value="<%= country.id %>" <%= (country.id === Number(form.countryId)) ? 'selected' : '' %> >
+                    <%= country.name %>
+                  </option>
+                <% }) %>
+              </select>
+              <br>
+              <button type="submit">変更</button>
+            </form>
+            <div class="errors">
+              <% if (errors) {
+                errors.forEach((error) => { %>
+                  <p><%= error %></p>
+                <% })
+              } %>
+            </div>
+          </article>
+        </section>
+      </main>
 
-    <form action="/profile" method="POST">
-      <input type="date" name="birthday" value="<%= form.birthday %>">
-      <br><br>
-      <select name="gender">
-        <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
-        <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
-      </select>
-      <br><br>
-      <select name="countryId">
-        <% countries.forEach((country) => { %>
-          <option value="<%= country.id %>" <%= (country.id === Number(form.countryId)) ? 'selected' : '' %> >
-            <%= country.name %>
-          </option>
-        <% }) %>
-      </select>
-      <br><br>
-      <button type="submit">変更</button>
-    </form>
-
-    <% if (errors) {
-      errors.forEach((error) => { %>
-        <p><%= error %></p>
-      <% })
-    } %>
+      <%- include("footer", {}) %>
+    </div>
   </body>
 </html>

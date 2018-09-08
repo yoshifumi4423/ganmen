@@ -1,11 +1,32 @@
 <html>
-  <head></head>
+  <head>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/images/new.css">
+  </head>
   <body>
-    <div>
-      <form action="/images" method="POST" enctype="multipart/form-data">
-        <input type="file" name="faceImage">
-        <button type="submit">送信</button>
-      </form>
+    <div class="container">
+      <%- include("../header", {
+        form: {
+          logoUrl: "../logo_shape.png",
+          active: "images-new"
+        }
+      }) %>
+
+      <main>
+        <section>
+          <article>
+            <h1>画像投稿</h1>
+            <form action="/images" method="POST" enctype="multipart/form-data">
+              <input type="file" name="faceImage">
+              <br>
+              <button type="submit">送信</button>
+            </form>
+          </article>
+        </section>
+      </main>
+
+      <%- include("../footer", {}) %>
     </div>
   </body>
 </html>

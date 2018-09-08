@@ -1,8 +1,29 @@
 <html>
-  <head></head>
-
+  <head>
+    <link rel="stylesheet" href="/reset.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/images/index.css">
+  </head>
   <body>
-    <div id="images"></div>
-    <script src="/main.js"></script>
+    <div class="container">
+      <%- include("../header", {
+        form: {
+          logoUrl: "../logo_shape.png",
+          active: "images"
+        }
+      }) %>
+
+      <main>
+        <section>
+          <article>
+            <h1>画像一覧</h1>
+            <div id="images"></div>
+            <script src="/main.js"></script>
+          </article>
+        </section>
+      </main>
+
+      <%- include("../footer", {}) %>
+    </div>
   </body>
 </html>

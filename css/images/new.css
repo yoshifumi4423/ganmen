@@ -1,0 +1,17 @@
+main section {
+  margin: 60px auto 0;
+  max-width: 935px;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+  main section article h1 {
+    margin: 40px 40px;
+    font-weight: bold; }
+  main section article form {
+    margin: 40px 40px; }
+    main section article form input {
+      margin-bottom: 10px; }
+    main section article form button {
+      margin-top: 20px; }

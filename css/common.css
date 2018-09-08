@@ -1,0 +1,73 @@
+@charset "UTF-8";
+html {
+  height: 100%;
+  color: #262626; }
+  html a {
+    text-decoration: none; }
+
+body {
+  min-height: 100%;
+  font-family: Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif; }
+
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; }
+
+main {
+  order: 4;
+  flex-grow: 1;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; }
+
+header {
+  order: 0;
+  padding: 0px 0px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdbdb;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; }
+  header .logo {
+    flex-basis: 300px; }
+  header .empty-header {
+    flex-basis: 300px;
+    flex-shrink: 1; }
+  header .menu {
+    flex-basis: 350px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    header .menu .top a, header .menu .images a, header .menu .images-new a, header .menu .summary a {
+      padding: 16px 16px;
+      color: #999999;
+      display: block; }
+      header .menu .top a:hover, header .menu .images a:hover, header .menu .images-new a:hover, header .menu .summary a:hover {
+        color: #003569; }
+    header .menu .settings {
+      margin-left: 32px; }
+      header .menu .settings a {
+        padding: 12px 12px;
+        display: block;
+        background: url("settings.png") no-repeat; }
+        header .menu .settings a:hover {
+          background: url("settings_active.png") no-repeat; }
+    header .menu .active {
+      border-bottom: 2px solid #003569; }
+      header .menu .active a {
+        color: #003569; }
+
+footer {
+  order: 5;
+  padding: 40px 0px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+  footer p {
+    font-size: 12px;
+    color: #999999; }

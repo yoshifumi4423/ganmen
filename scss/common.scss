@@ -1,0 +1,105 @@
+html {
+  height: 100%;
+  color: #262626;
+
+  a {
+    text-decoration: none;    
+  }
+}
+
+body {
+  min-height: 100%;
+  font-family: Arial,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,"メイリオ",Meiryo,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+.container {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  order: 4;
+  flex-grow: 1;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+header {
+  order:0;
+  padding: 0px 0px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dbdbdbdb; 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  .logo {
+    flex-basis: 300px;
+  }
+
+  .empty-header {
+    flex-basis: 300px;
+    flex-shrink: 1;
+  }
+  
+  .menu {
+    flex-basis: 350px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+//    font-weight: bold;
+  
+    .top, .images, .images-new, .summary {
+      a {
+        padding: 16px 16px;
+        color: #999999;
+        display: block;
+  
+        &:hover {
+          color: #003569;
+        }
+      }
+    }
+
+    .settings {
+      margin-left: 32px;
+
+      a {
+        padding: 12px 12px;
+        display: block;
+        background: url("settings.png") no-repeat;
+
+        &:hover {
+          background: url("settings_active.png") no-repeat;
+        }
+      }
+    }
+
+    .active {
+      border-bottom: 2px solid #003569;
+
+      a {
+        color: #003569;
+      }
+    }
+  }
+}
+
+footer {
+  order: 5;
+  padding: 40px 0px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  p {
+    font-size: 12px;
+    color: #999999;
+  }
+}

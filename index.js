@@ -6,6 +6,7 @@ const models = require('./models')
 const session = require("express-session")
 const sessionFileStore = require("session-file-store")(session)
 const bcrypt = require("bcrypt")
+const config = require("./config/config.js")[process.env.NODE_ENV]
 
 const auth = require('./middlewares/auth')
 
@@ -41,7 +42,7 @@ app.use('/account', accountRouter)
 app.use('/summary', summaryRouter)
 app.use('/settings', settingsRouter)
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env[config.use_env_variable_port], () => {
   console.log("server listen")
 })
 

@@ -1,14 +1,14 @@
 'use strict'
+require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 const models = require('../models')
+const env       = process.env.NODE_ENV || 'development'
+const config    = require(__dirname + '/../config/config.js')[env]
 const Sequelize = require('sequelize')
-const sequelize = new Sequelize('test', 'yoshifumikanno', '', {
-  host: 'localhost',
-  dialect: 'postgres'
-})
+const sequelize = new Sequelize(process.env[config.use_env_variable], config)
 
 router.get('/', auth, loginChecker, (req, res, next) => {
   sequelize.query(

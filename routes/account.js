@@ -3,12 +3,12 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const auth = require('../middlewares/auth')
+const loginChecker = require('../middlewares/loginChecker')
 
-router.get('/', auth, (req, res) => {
-  if (!req.user) {
-    return res.send('error: please login.')
-  }
+router.use(auth)
+router.use(loginChecker)
 
+router.get('/', (req, res) => {
   res.render('account', {
     form: {
       email: req.user.email,
@@ -17,11 +17,7 @@ router.get('/', auth, (req, res) => {
   })
 })
 
-router.post('/email', auth, (req, res, next) => {
-  if (!req.user) {
-    return res.send('error: please login.')
-  }
-
+router.post('/email', (req, res, next) => {
   req.user.update(
     { email: req.body.email },
     { returning: true } // 変更後のデータを返すかどうか
@@ -35,11 +31,7 @@ router.post('/email', auth, (req, res, next) => {
   }).catch(next)
 })
 
-router.post('/password', auth, (req, res, next) => {
-  if (!req.user) {
-    return res.send('error: please login.')
-  }
-
+router.post('/password', (req, res, next) => {
   const currentPw = req.body.currentPassword
   const newPw = req.body.newPassword
   const newPwConfirmation = req.body.newPasswordConfirmation

@@ -47,7 +47,6 @@ app.listen(process.env[config.use_env_variable_port], () => {
 })
 
 app.get('/', auth, (req, res,) => {
-  throw new Error()
   if (req.user) {
     res.redirect('../images')
   } else {

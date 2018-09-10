@@ -14,13 +14,17 @@ router.get('/', (req, res) => {
 })
 
 router.get('/new', (req, res) => {
-  res.render('images/new')
+  res.render('images/new', {
+    success: []
+  })
 })
 
 router.post('/', upload, (req, res, next) => {
   req.file.userId = req.user.id
   models.Image.create(req.file).then(image => {
-    res.send('res_send')
+    res.render('images/new', {
+      success: ["画像を投稿しました。"]
+    })
   }).catch(next)
 })
 

@@ -15,3 +15,5 @@ main section {
       margin-bottom: 10px; }
     main section article form button {
       margin-top: 20px; }
+  main section article .success p {
+    margin-bottom: 10px; }

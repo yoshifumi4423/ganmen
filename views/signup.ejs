@@ -25,9 +25,7 @@
               <br>
               <select name="countryId">
                 <% countries.forEach((country) => { %>
-                  <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId) ? 'selected' : '' %> >
-                    <%= country.name %>
-                  </option>
+                  <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId.toString()) ? 'selected' : '' %> ><%= country.name %></option>
                 <% }) %>
               </select>
               <br>

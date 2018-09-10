@@ -12,8 +12,14 @@ router.use(logoutChecker)
 router.use(countries)
 
 router.get('/', (req, res) => {
+  const japan = req.countries.find(country => {
+    return country.name.toLowerCase() === "japan"
+  })
+
   res.render('signup', {
-    form: {},
+    form: {
+      countryId: japan.id
+    },
     countries: req.countries,
     errors: []
   })

@@ -58,5 +58,5 @@ app.use((errorObj, req, res, next) => {
   console.log("     ===== START (Internnal Server Error 500.) =====     ")
   console.log(errorObj)
   console.log("     =====  END  =====     ")
-  res.status(500).send("Internal Server Error 500.")
+  res.status(500).send("<p style='font-weight: bold; text-align: center;'>Internal Server Error 500.</p>")
 })

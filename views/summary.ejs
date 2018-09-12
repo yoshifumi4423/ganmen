@@ -23,6 +23,9 @@
               if (summaries.length > 0) {
               summaries.forEach(summary => { %>
                 <img src="<%= summary.thumbnailUrl %>">
+                <form action="/summary/delete" method="POST">
+                  <button type="submit" name="imageId" value="<%= summary.id %>">画像の削除</button>
+                </form>
                 <p>like率: <%= summary.likeRate %></p>
               <% })
               } else if (summaries.length === 0) { %>

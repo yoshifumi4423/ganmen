@@ -19,7 +19,7 @@
             <form action="/account/email" method="POST">
               <input type="email" name="email" placeholder="email" value="<%= form.email %>">
               <br>
-              <button type="submit">メールアドレスを変更</button>
+              <button type="submit">メールアドレスの変更</button>
               <br>
             </form>
             <form action="/account/password" method="POST">
@@ -29,7 +29,10 @@
               <br>
               <input type="password" name="newPasswordConfirmation" placeholder="新しいパスワードの確認">
               <br>
-              <button type="submit">パスワードを変更</button>
+              <button type="submit">パスワードの変更</button>
+            </form>
+            <form action="/account/delete" method="POST">
+              <button type="submit">アカウントの削除</button>
             </form>
             <div class="errors">
               <% if (errors) {

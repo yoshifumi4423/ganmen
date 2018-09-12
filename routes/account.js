@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const models = require('../models')
 const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 
@@ -67,6 +68,35 @@ router.post('/password', (req, res, next) => {
     },
     errors: req.errors
   })
+})
+
+router.post('/delete', (req, res, next) => {
+  models.Image.findAll({
+    where: {
+      userId: req.user.id
+    }
+  }).then(images => {
+    // ユーザーの画像を削除（複数のテーブルを削除するためmodelsのメソッドを使用する。）
+    models.Image.destroy({
+      where: {
+        userId: req.user.id
+      }
+    })
+
+    // ユーザーの画像に対する評価を削除（複数のテーブルを削除するためmodelsのメソッドを使用する。）
+    images.forEach(image => {
+      models.Rating.destroy({
+        where: {
+          imageId: image.id
+        }
+      })
+    })
+  }).catch(next)
+
+  // ユーザーを削除
+  req.user.destroy()
+
+  res.redirect('../logout')
 })
 
 module.exports = router

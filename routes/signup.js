@@ -1,11 +1,14 @@
 'use strict'
 const express = require('express')
+const router = express.Router()
 const models = require('../models')
 const bcrypt = require("bcrypt")
 const auth = require('../middlewares/auth')
+const sendMail = require('../utils/sendMail')
+const mailOptions = require('../utils/mailOptions')
 const logoutChecker = require('../middlewares/logoutChecker')
 const countries = require('../middlewares/countries')
-const router = express.Router()
+
 
 router.use(auth)
 router.use(logoutChecker)
@@ -49,7 +52,11 @@ router.post('/', (req, res, next) => {
       gender: req.body.gender,
       countryId: req.body.countryId,
     }).then(user => {
-      // ToDo: サインアップ後にログインできているかチェックする。
+      mailOptions.signup.to = user.email
+      mailOptions.signup.html = mailOptions.signup.html.join("\n")
+      sendMail(mailOptions.signup).then(info => {
+        console.log("Sent email after user's signup.\n", info)
+      }).catch(next)
       res.redirect('/')
     }).catch(errorObj => {
       if(errorObj.name === 'SequelizeValidationError' ||
@@ -60,7 +67,7 @@ router.post('/', (req, res, next) => {
             errors: errorObj.errors.map(e => e.message)
           })
       }
-      return next(errorObj)
+      next(errorObj)
     })
   })
 })

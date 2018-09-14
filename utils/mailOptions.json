@@ -1,0 +1,19 @@
+{
+  "signup": {
+    "from": "Profeeling",
+    "to": "",
+    "subject": "Profeelingのアカウントを作成しました",
+    "text": "",
+    "html": [
+      "<p><a href='http://profeeling.net'>Profeeling</a>をご利用いただきありがとうございます。</p>"
+    ]
+  },
+  "delete": {
+    "from": "Profeeling",
+    "to": "",
+    "subject": "Profeelingのアカウントを削除しました",
+    "html": [
+      "<p><a href='http://profeeling.net'>Profeeling</a>をご利用いただきありがとうございました。</p>"
+    ]
+  }
+}

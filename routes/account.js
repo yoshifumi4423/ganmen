@@ -3,6 +3,8 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const models = require('../models')
+const sendMail = require('../utils/sendMail')
+const mailOptions = require('../utils/mailOptions')
 const auth = require('../middlewares/auth')
 const loginChecker = require('../middlewares/loginChecker')
 
@@ -76,25 +78,34 @@ router.post('/delete', (req, res, next) => {
       userId: req.user.id
     }
   }).then(images => {
-    // ユーザーの画像を削除（複数のテーブルを削除するためmodelsのメソッドを使用する。）
-    models.Image.destroy({
-      where: {
-        userId: req.user.id
-      }
-    })
-
-    // ユーザーの画像に対する評価を削除（複数のテーブルを削除するためmodelsのメソッドを使用する。）
     images.forEach(image => {
+      // ユーザーの画像に対する評価を削除（複数のテーブルを削除するためmodelsのメソッドを使用する）
       models.Rating.destroy({
         where: {
           imageId: image.id
         }
       })
     })
+  }).then(() => {
+    // ユーザーの画像に対する評価を削除（複数のテーブルを削除するためmodelsのメソッドを使用する）
+    models.Image.destroy({
+      where: {
+        userId: req.user.id
+      }
+    })
+    console.log("no image")
+  }).then(() => {
+    const email = req.user.email
+    // ユーザーを削除
+    req.user.destroy()
+    return Promise.resolve(email)
+  }).then(email => {
+    mailOptions.delete.to = email
+    mailOptions.delete.html = mailOptions.delete.html.join("\n")
+    sendMail(mailOptions.delete).then(info => {
+      console.log("Sent email after user's signup.\n", info)
+    }).catch(next)
   }).catch(next)
-
-  // ユーザーを削除
-  req.user.destroy()
 
   res.redirect('../logout')
 })

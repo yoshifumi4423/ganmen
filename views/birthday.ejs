@@ -1,0 +1,21 @@
+<select name="birthdayYear">
+  <% if(years && form.birthdayYear) { %>
+    <% years.forEach(year => { %>
+      <option value="<%= year %>" <%= (year.toString() === form.birthdayYear.toString()) ? 'selected' : '' %> ><%= year %></option>
+    <% }) %>
+  <% } %>
+</select>
+<select name="birthdayMonth">
+  <% if(months && form.birthdayMonth) { %>
+    <% months.forEach(month => { %>
+      <option value="<%= month %>" <%= (month.toString() === form.birthdayMonth.toString()) ? 'selected' : '' %> ><%= month %></option>
+    <% }) %>
+  <% } %>
+</select>
+<select name="birthdayDay">
+  <% if(days && form.birthdayDay) { %>
+    <% days.forEach(day => { %>
+      <option value="<%= day %>" <%= (day.toString() === form.birthdayDay.toString()) ? 'selected' : '' %> ><%= day %></option>
+    <% }) %>
+  <% } %>
+</select>

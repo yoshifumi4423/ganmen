@@ -16,7 +16,12 @@
               <br>
               <input type="password" name="password" placeholder="password" value="">
               <br>
-              <input type="date" name="birthday" value="<%= form.birthday %>">
+              <%- include("birthday", {
+                form: form,
+                years: years,
+                months: months,
+                days: days
+                }) %>
               <br>
               <select name="gender">
                 <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>

@@ -18,7 +18,12 @@
           <article>
             <h1>プロフィール変更</h1>
             <form action="/profile" method="POST">
-              <input type="date" name="birthday" value="<%= form.birthday %>">
+              <%- include("birthday", {
+                form: form,
+                years: years,
+                months: months,
+                days: days
+                }) %>
               <br>
               <select name="gender">
                 <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>

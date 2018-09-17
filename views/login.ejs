@@ -9,21 +9,36 @@
       <main>
         <section>
           <article>
-            <img src="logo_shape.png"></img>
-            <h1>ログイン</h1>
-            <form action="/login" method="POST">
-              <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-              <br>
-              <input type="password" name="password" placeholder="password">
-              <br>
-              <button type="submit">ログイン</button>
-            </form>
-            <div class="errors">
-              <% if (errors) {
-                errors.forEach((error) => { %>
-                  <p><%= error %></p>
-                <% })
-              } %>
+            <div class="article-item">
+              <div class="logo">
+                <img src="logo_shape.png"></img>            
+              </div>
+            </div>
+            <div class="article-item">
+              <form action="/login" method="POST">
+                <div>
+                  <label>メールアドレス<br>
+                    <input type="text" name="email" value="<%= form.email %>">
+                  </label>
+                </div>
+                <div>
+                  <label>パスワード<br>
+                    <input type="password" name="password" value="">
+                  </label>
+                </div>
+                <div>
+                  <button type="submit">ログイン</button>
+                </div>
+              </form>
+            </div>
+            <div class="article-item">
+              <div class="errors">
+                <% if (errors) {
+                  errors.forEach((error) => { %>
+                    <p><%= error %></p>
+                  <% })
+                } %>
+              </div>
             </div>
           </article>
         </section>

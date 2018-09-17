@@ -9,44 +9,67 @@
       <main>
         <section>
           <article>
-            <img src="logo_shape.png"></img>
-            <h1>アカウント作成</h1>
-            <form action="/signup" method="POST">
-              <input type="text" name="email" placeholder="email" value="<%= form.email %>">
-              <br>
-              <input type="password" name="password" placeholder="password" value="">
-              <br>
-              <%- include("birthday", {
-                form: form,
-                years: years,
-                months: months,
-                days: days
-                }) %>
-              <br>
-              <select name="gender">
-                <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
-                <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
-              </select>
-              <br>
-              <select name="countryId">
-                <% countries.forEach((country) => { %>
-                  <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId.toString()) ? 'selected' : '' %> ><%= country.name %></option>
-                <% }) %>
-              </select>
-              <br>
-              <button type="submit">サインアップ</button>
-            </form>
-            <div class="errors">
-              <% if(errors) {
-                errors.forEach((error) => { %>
-                  <p><%= error %></p>
-                <% })
-              } %>
+            <div class="article-item">
+              <div class="logo">
+                <img src="logo_shape.png"></img>            
+              </div>
             </div>
-          </main>
-        </article>
-      </section>
-
+            <div class="article-item">
+              <form action="/signup" method="POST">
+                <div>
+                  <label>メールアドレス<br>
+                    <input type="text" name="email" value="<%= form.email %>">
+                  </label>
+                </div>
+                <div>
+                  <label>パスワード<br>
+                    <input type="password" name="password" value="">
+                  </label>
+                </div>
+                <div>
+                  <label>誕生日<br>
+                    <%- include("birthday", {
+                      form: form,
+                      years: years,
+                      months: months,
+                      days: days
+                      }) %>
+                  </label>
+                </div>
+                <div>
+                  <label>性別<br>
+                    <select name="gender">
+                      <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
+                      <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <label>国<br>
+                    <select name="countryId">
+                      <% countries.forEach((country) => { %>
+                        <option value="<%= country.id %>" <%= (country.id.toString() === form.countryId.toString()) ? 'selected' : '' %> ><%= country.name %></option>
+                      <% }) %>
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <button type="submit">アカウント作成</button>
+                </div>
+              </form>
+            </div>
+            <div class="article-item">
+              <div class="errors">
+                <% if(errors) {
+                  errors.forEach((error) => { %>
+                    <p><%= error %></p>
+                  <% })
+                } %>
+              </div>
+            <div>
+          </article>
+        </section>
+      </main>
       <%- include("footer", {}) %>
     </div>
   </body>

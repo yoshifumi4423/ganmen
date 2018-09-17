@@ -11,22 +11,22 @@ main {
     justify-content: center;
 
     article {
-      h1 {
-        margin: 40px 40px;
-        font-weight: bold;
-      }
 
-      ul {
-        margin: 40px 40px;
+      .article-item {
+        margin: 40px 0px;
 
-        li {
-          margin-bottom: 10px;
-
-          a {
-            color: #999999;
-    
-            &:hover {
-              color: #003569;
+        ul {
+          margin: 40px 40px;
+  
+          li {
+            margin-bottom: 10px;
+  
+            a {
+              color: #999999;
+      
+              &:hover {
+                color: #003569;
+              }
             }
           }
         }

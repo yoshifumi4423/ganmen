@@ -8,14 +8,13 @@ main section {
   display: flex;
   flex-direction: row;
   justify-content: center; }
-  main section article h1 {
-    margin: 40px 40px;
-    font-weight: bold; }
-  main section article ul {
-    margin: 40px 40px; }
-    main section article ul li {
-      margin-bottom: 10px; }
-      main section article ul li a {
-        color: #999999; }
-        main section article ul li a:hover {
-          color: #003569; }
+  main section article .article-item {
+    margin: 40px 0px; }
+    main section article .article-item ul {
+      margin: 40px 40px; }
+      main section article .article-item ul li {
+        margin-bottom: 10px; }
+        main section article .article-item ul li a {
+          color: #999999; }
+          main section article .article-item ul li a:hover {
+            color: #003569; }

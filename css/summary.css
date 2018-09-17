@@ -6,8 +6,53 @@ main section {
   display: flex;
   flex-direction: row;
   justify-content: center; }
-  main section article h1 {
-    margin: 40px 40px;
-    font-weight: bold; }
-  main section article .summaries {
-    margin: 40px 40px; }
+  main section article {
+    width: 600px;
+    padding: 40px 40px; }
+    main section article .article-item {
+      margin: 0px 0px 40px 0px; }
+      main section article .article-item .image {
+        margin: 0px 0px 40px 0px;
+        text-align: center; }
+        main section article .article-item .image img {
+          width: 520px; }
+        main section article .article-item .image form {
+          text-align: right; }
+          main section article .article-item .image form label {
+            font-size: 12px;
+            color: #999999; }
+          main section article .article-item .image form input {
+            margin-bottom: 10px;
+            width: 100%;
+            height: 26px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            box-shadow: 0px; }
+          main section article .article-item .image form select {
+            margin-bottom: 10px;
+            width: 25%; }
+          main section article .article-item .image form button {
+            width: 80px;
+            height: 24px;
+            border: none;
+            border-radius: 3px;
+            background-color: #3897f0;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer; }
+          main section article .article-item .image form .image-delete button {
+            background-color: #999999; }
+            main section article .article-item .image form .image-delete button:hover {
+              background-color: #262626; }
+        main section article .article-item .image .image-rating {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-content: center; }
+          main section article .article-item .image .image-rating .like-word {
+            font-size: 8px; }
+            main section article .article-item .image .image-rating .like-word img {
+              width: 48px; }
+          main section article .article-item .image .image-rating .like-rate {
+            font-size: 50px; }

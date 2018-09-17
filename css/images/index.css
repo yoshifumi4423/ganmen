@@ -6,7 +6,5 @@ main section {
   display: flex;
   flex-direction: row;
   justify-content: center; }
-  main section article h1 {
-    margin: 40px 40px;
-    width: 600px;
-    font-weight: bold; }
+  main section article {
+    width: 600px; }

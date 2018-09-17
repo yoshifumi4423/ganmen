@@ -8,14 +8,36 @@ main section {
   display: flex;
   flex-direction: row;
   justify-content: center; }
-  main section article h1 {
-    margin: 40px 40px;
-    font-weight: bold; }
-  main section article form {
-    margin: 40px 40px; }
-    main section article form input, main section article form select {
-      margin-bottom: 10px; }
-    main section article form button {
-      margin-top: 20px; }
-  main section article .errors p {
-    margin-bottom: 10px; }
+  main section article {
+    width: 350px;
+    padding: 40px 40px; }
+    main section article .article-item {
+      margin: 40px 0px; }
+      main section article .article-item .logo {
+        text-align: center; }
+      main section article .article-item form label {
+        font-size: 12px;
+        color: #999999; }
+      main section article .article-item form input {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 26px;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+        box-shadow: 0px; }
+      main section article .article-item form select {
+        margin-bottom: 10px;
+        width: 25%; }
+      main section article .article-item form button {
+        margin: 20px 0px 40px 0px;
+        width: 100%;
+        height: 32px;
+        border: none;
+        border-radius: 3px;
+        background-color: #3897f0;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 14px;
+        cursor: pointer; }
+      main section article .article-item .errors p {
+        margin-bottom: 10px; }

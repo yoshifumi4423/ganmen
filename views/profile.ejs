@@ -16,37 +16,51 @@
       <main>
         <section>
           <article>
-            <h1>プロフィール変更</h1>
-            <form action="/profile" method="POST">
-              <%- include("birthday", {
-                form: form,
-                years: years,
-                months: months,
-                days: days
-                }) %>
-              <br>
-              <select name="gender">
-                <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
-                <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
-              </select>
-              <br>
-              <select name="countryId">
-                <% countries.forEach((country) => { %>
-                  <option value="<%= country.id %>" <%= (country.id === Number(form.countryId)) ? 'selected' : '' %> >
-                    <%= country.name %>
-                  </option>
-                <% }) %>
-              </select>
-              <br>
-              <button type="submit">変更</button>
-            </form>
-            <div class="errors">
-              <% if (errors) {
-                errors.forEach((error) => { %>
-                  <p><%= error %></p>
-                <% })
-              } %>
+            <div class="article-item">
+              <form action="/profile" method="POST">
+                <div>
+                  <label>誕生日<br>
+                    <%- include("birthday", {
+                      form: form,
+                      years: years,
+                      months: months,
+                      days: days
+                      }) %>
+                  </label>
+                </div>
+                <div>
+                  <label>性別<br>
+                    <select name="gender">
+                      <option value="man" <%= (form.gender === "man") && "selected" %>>Man</option>
+                      <option value="woman" <%= (form.gender === "woman") && "selected" %>>Woman</option>
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <label>国<br>
+                    <select name="countryId">
+                      <% countries.forEach((country) => { %>
+                        <option value="<%= country.id %>" <%= (country.id === Number(form.countryId)) ? 'selected' : '' %> >
+                          <%= country.name %>
+                        </option>
+                      <% }) %>
+                    </select>
+                  </label>
+                </div>
+                <div>
+                  <button type="submit">プロフィールの変更</button>
+                </div>
+              </form>
             </div>
+            <div class="article-item">
+              <div class="errors">
+                <% if(errors) {
+                  errors.forEach((error) => { %>
+                    <p><%= error %></p>
+                  <% })
+                } %>
+              </div>
+            <div>
           </article>
         </section>
       </main>

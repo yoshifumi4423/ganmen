@@ -9,13 +9,9 @@ main {
     justify-content: center;
 
     article {
-      h1 {
-        margin: 40px 40px;
-        width: 600px;
-        font-weight: bold;
-      }
-    
-      // コンテンツはReact側で調整する
+      width: 600px;
+
+      // このタグ以降のタグはReact側で調整する
     }
   }
 }

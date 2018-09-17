@@ -1,25 +1,20 @@
-<html>
-  <head></head>
-  <body>
-    <header>
-      <div class="logo">
-        <a href="/"><img src=<%= form.logoUrl %> ></a>
-      </div>
-      <ul class="menu">
-        <li class=<%- (form.active === "images") ? "'images active'" : "images" %> >
-          <a href="/images">画像一覧</a>
-        </li>
-        <li class=<%- (form.active === "images-new") ? "'images-new active'" : "images-new" %> >
-          <a href="/images/new">画像投稿</a>
-        </li>
-        <li class=<%- (form.active === "summary") ? "'summary active'" : "summary" %> >
-          <a href="/summary">集計</a>
-        </li>
-        <li class=<%- (form.active === "settings") ? "'settings active'" : "settings"%> >
-          <a href="/settings"></a>
-        </li>
-      </ul>
-      <div class="empty-header"></div>
-    </header>
-  </body>
-</html>
+<header>
+  <div class="logo">
+    <a href="/"><img src=<%= form.logoUrl %> ></a>
+  </div>
+  <ul class="menu">
+    <li class=<%- (form.active === "images") ? "'images active'" : "images" %> >
+      <a href="/images">画像一覧</a>
+    </li>
+    <li class=<%- (form.active === "images-new") ? "'images-new active'" : "images-new" %> >
+      <a href="/images/new">画像投稿</a>
+    </li>
+    <li class=<%- (form.active === "summary") ? "'summary active'" : "summary" %> >
+      <a href="/summary">集計</a>
+    </li>
+    <li class=<%- (form.active === "settings") ? "'settings active'" : "settings"%> >
+      <a href="/settings"></a>
+    </li>
+  </ul>
+  <div class="empty-header"></div>
+</header>

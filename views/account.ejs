@@ -15,31 +15,55 @@
       <main>
         <section>
           <article>
-            <h1>アカウントの変更</h1>
-            <form action="/account/email" method="POST">
-              <input type="email" name="email" placeholder="email" value="<%= form.email %>">
-              <br>
-              <button type="submit">メールアドレスの変更</button>
-              <br>
-            </form>
-            <form action="/account/password" method="POST">
-              <input type="password" name="currentPassword" placeholder="現在のpassword">
-              <br>
-              <input type="password" name="newPassword" placeholder="新しいパスワード">
-              <br>
-              <input type="password" name="newPasswordConfirmation" placeholder="新しいパスワードの確認">
-              <br>
-              <button type="submit">パスワードの変更</button>
-            </form>
-            <form action="/account/delete" method="POST">
-              <button type="submit">アカウントの削除</button>
-            </form>
-            <div class="errors">
-              <% if (errors) {
-                errors.forEach((error) => { %>
-                  <p><%= error %></p>
-                <% })
-              } %>
+            <div class="article-item">
+              <form action="/account/email" method="POST">
+                <div>
+                  <label>メールアドレス<br>
+                    <input type="email" name="email" value="<%= form.email %>">
+                  </label>
+                </div>
+                <div>
+                  <button type="submit">メールアドレスの変更</button>
+                </div>
+              </form>
+            </div>
+            <div class="article-item">
+              <form action="/account/password" method="POST">
+                <div>
+                  <label>現在のパスワード<br>
+                    <input type="password" name="currentPassword">
+                  </label>
+                </div>
+                <div>
+                  <label>新しいパスワード<br>
+                    <input type="password" name="newPassword">
+                  </label>
+                </div>
+                <div>
+                  <label>新しいパスワードの確認<br>
+                    <input type="password" name="newPasswordConfirmation">
+                  </label>
+                </div>
+                  <div>
+                    <button type="submit">パスワードの変更</button>
+                </div>
+              </form>
+            </div>
+            <div class="article-item">
+              <form action="/account/delete" method="POST">
+                <div class="account-delete">
+                  <button type="submit">アカウントの削除</button>
+                </div>
+              </form>
+            </div>
+            <div class="article-item">
+              <div class="errors">
+                <% if (errors) {
+                  errors.forEach((error) => { %>
+                    <p><%= error %></p>
+                  <% })
+                } %>
+              </div>
             </div>
           </article>
         </section>

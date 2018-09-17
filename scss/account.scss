@@ -9,28 +9,62 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: center;
-  
+
     article {
-      h1 {
-        margin: 40px 40px;
-        font-weight: bold;
-      }
-  
-      form {
-        margin: 40px 40px;
-  
-        input {
-          margin-bottom: 10px;
+      width: 350px;
+      padding: 40px 40px;
+
+      .article-item {
+        margin: 40px 0px;        
+
+        .logo {
+          text-align: center;
         }
   
-        button {
-          margin-top: 20px;
-        }
-      }
+        form {
+          label {
+            font-size: 12px;
+            color: #999999;
+          }
   
-      .errors {
-        p {
-          margin-bottom: 10px;
+          input {
+            margin-bottom: 10px;
+            width: 100%;
+            height: 26px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            box-shadow: 0px
+          }
+  
+          select {
+            margin-bottom: 10px;
+            width: 25%;
+          }
+      
+          button {
+            margin: 20px 0px 40px 0px;
+            width: 100%;
+            height: 32px;
+            border: none;
+            border-radius: 3px;
+            background-color: #3897f0;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+          }
+
+          .account-delete {
+            button {
+              background-color: #cb2431;
+            }
+          }
+        }
+      
+        .errors {
+          p {
+            margin-bottom: 10px;
+          }
         }
       }
     }

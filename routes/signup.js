@@ -54,9 +54,10 @@ router.post('/', (req, res, next) => {
       gender: req.body.gender,
       countryId: req.body.countryId,
     }).then(user => {
-      mailOptions.signup.to = user.email
-      mailOptions.signup.html = mailOptions.signup.html.join("\n")
-      sendMail(mailOptions.signup).then(info => {
+      let option = JSON.parse(JSON.stringify(mailOptions))
+      option.signup.to = user.email
+      option.signup.html = option.signup.html.join("\n")
+      sendMail(option.signup).then(info => {
         console.log("Sent email after user's signup.\n", info)
       }).catch(next)
       res.redirect('/')
